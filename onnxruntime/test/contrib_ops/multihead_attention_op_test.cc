@@ -282,6 +282,18 @@ TEST(MultiHeadAttentionTest, CrossAttention_Batch2_HeadSize40) {
 }
 #endif
 
+TEST(MultiHeadAttentionTest, CrossAttention_Batch2_HeadSize32_RightSidePadding) {
+  AttentionTestData data;
+  GetCrossAttentionData_Batch2_HeadSize32_RightSidePadding(data);
+  RunMultiHeadAttentionTests(data);
+}
+
+TEST(MultiHeadAttentionTest, CrossAttention_Batch1_HeadSize32_LeftSidePadding) {
+  AttentionTestData data;
+  GetCrossAttentionData_Batch1_HeadSize32_LeftSidePadding(data);
+  RunMultiHeadAttentionTests(data);
+}
+
 // This tests qk_head_size != k_head_size
 TEST(MultiHeadAttentionTest, CrossAttention_Batch2_HeadSize16_8) {
   AttentionTestData data;

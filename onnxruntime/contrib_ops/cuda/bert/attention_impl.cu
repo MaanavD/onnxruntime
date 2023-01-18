@@ -113,7 +113,7 @@ size_t GetAttentionWorkspaceSize(
     size_t k_sequence_offset_bytes = q_sequence_offset_bytes;                                     // K has no padding
 
     size_t fmha_buffer_bytes = 0;
-    if (MemoryEfficientAttentionParams::need_workspace(v_head_size, element_size == sizeof(float)) {
+    if (MemoryEfficientAttentionParams::need_workspace(v_head_size, element_size == sizeof(float))) {
       fmha_buffer_bytes = batch_size * sequence_length * num_heads * v_head_size * sizeof(float);
     }
 
