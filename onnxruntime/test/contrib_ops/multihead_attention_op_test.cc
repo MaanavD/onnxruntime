@@ -280,7 +280,6 @@ TEST(MultiHeadAttentionTest, CrossAttention_Batch2_HeadSize40) {
   GetCrossAttentionData_HeadSize40(data);
   RunMultiHeadAttentionTests(data);
 }
-#endif
 
 TEST(MultiHeadAttentionTest, CrossAttention_Batch2_HeadSize32_RightSidePadding) {
   AttentionTestData data;
@@ -293,6 +292,7 @@ TEST(MultiHeadAttentionTest, CrossAttention_Batch1_HeadSize32_LeftSidePadding) {
   GetCrossAttentionData_Batch1_HeadSize32_LeftSidePadding(data);
   RunMultiHeadAttentionTests(data);
 }
+#endif
 
 // This tests qk_head_size != k_head_size
 TEST(MultiHeadAttentionTest, CrossAttention_Batch2_HeadSize16_8) {
