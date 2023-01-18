@@ -17,6 +17,3 @@
 [submodule "cmake/external/onnxruntime-extensions"]
 	path = cmake/external/onnxruntime-extensions
 	url = https://github.com/microsoft/onnxruntime-extensions.git
-[submodule "cmake/external/cutlass"]
-	path = cmake/external/cutlass
-	url = https://github.com/NVIDIA/cutlass.git
