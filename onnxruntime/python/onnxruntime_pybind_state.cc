@@ -1333,7 +1333,7 @@ Applies to session load, initialization, etc. Default is 0.)pbdoc")
             ORT_THROW("External initializers are not supported in this build.");
 #endif
       });
-      
+
   py::class_<RunOptions>(m, "RunOptions", R"pbdoc(Configuration information for a single Run.)pbdoc")
       .def(py::init())
       .def_readwrite("log_severity_level", &RunOptions::run_log_severity_level,
@@ -1650,6 +1650,15 @@ including arg name, arg type (contains both type and shape).)pbdoc")
           status = sess->GetSessionHandle()->Run(*run_options, *io_binding.Get());
         if (!status.IsOK())
           throw std::runtime_error("Error in execution: " + status.ErrorMessage());
+      })
+      .def("get_tuning_results", [](PyInferenceSession* sess) -> std::vector<TuningResults> {
+        return sess->GetSessionHandle()->GetTuningResults();
+      })
+      .def("set_tuning_results", [](PyInferenceSession* sess, const std::vector<TuningResults>& results) -> void {
+        Status status = sess->GetSessionHandle()->SetTuningResults(results);
+        if (!status.IsOK()) {
+          throw std::runtime_error("Error in execution: " + status.ErrorMessage());
+        }
       });
 
   py::enum_<onnxruntime::ArenaExtendStrategy>(m, "ArenaExtendStrategy", py::arithmetic())

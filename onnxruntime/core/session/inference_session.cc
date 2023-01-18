@@ -1021,7 +1021,7 @@ Status InferenceSession::LoadOrtModelWithLoader(std::function<Status()> load_ort
                 "The ORT format model version [", fbs_ort_model_version->string_view(),
                 "] is not supported in this build ", ORT_VERSION, ". ",
                 kOrtFormatVersion5BreakingChangeNote);
-#else  // ^^ defined(ORT_MINIMAL_BUILD) ^^ / vv !defined(ORT_MINIMAL_BUILD) vv
+#else   // ^^ defined(ORT_MINIMAL_BUILD) ^^ / vv !defined(ORT_MINIMAL_BUILD) vv
   const auto has_saved_runtime_optimizations = [](const fbs::InferenceSession& fbs_session) -> bool {
     if (const auto* fbs_model = fbs_session.model()) {
       if (const auto* fbs_graph = fbs_model->graph()) {
@@ -2179,6 +2179,37 @@ std::string InferenceSession::EndProfiling() {
 
 const profiling::Profiler& InferenceSession::GetProfiling() const {
   return session_profiler_;
+}
+
+std::vector<TuningResults> InferenceSession::GetTuningResults() const {
+  std::vector<TuningResults> ret;
+  for (const auto& provider : execution_providers_) {
+    const auto* tuning_ctx = provider->GetTuningContext();
+    if (tuning_ctx != nullptr) {
+      ret.emplace_back(tuning_ctx->SaveTuningResults(provider.get()));
+    }
+  }
+  return ret;
+}
+
+Status InferenceSession::SetTuningResults(const std::vector<TuningResults>& trs) {
+  for (int i = 0; i < trs.size(); i++) {
+    const auto& tr = trs[i];
+    auto* provider = execution_providers_.Get(tr.ep);
+    if (provider == nullptr) {
+      LOGS(*session_logger_, WARNING) << "Cannot find " << tr.ep << ", skipping...";
+      continue;
+    }
+
+    auto* tuning_ctx = provider->GetTuningContext();
+    ORT_RETURN_IF(tuning_ctx == nullptr, "Invalid TuningResults (index=", i, "). ", tr.ep, " does not support TunableOp.");
+
+    auto status = tuning_ctx->LoadTuningResults(tr);
+    if (!status.IsOK()) {
+      LOGS(*session_logger_, WARNING) << "Failed to load TuningResults (index=" << i << "). It will be ignored. Reason: " << status.ErrorMessage();
+    }
+  }
+  return Status::OK();
 }
 
 AllocatorPtr InferenceSession::GetAllocator(const OrtMemoryInfo& mem_info) const {
