@@ -291,6 +291,13 @@ if (onnxruntime_ENABLE_ATEN)
   target_include_directories(onnxruntime_providers PRIVATE ${DLPACK_INCLUDE_DIR})
 endif()
 
+if(onnxruntime_USE_CUDA)
+  if(NOT onnxruntime_DISABLE_CONTRIB_OPS)
+    target_include_directories(onnxruntime_providers_cuda PRIVATE ${PROJECT_SOURCE_DIR}/external/cutlass/include)
+    target_include_directories(onnxruntime_providers_cuda PRIVATE ${PROJECT_SOURCE_DIR}/external/cutlass/examples)
+  endif()
+endif()
+
 if (onnxruntime_ENABLE_TRAINING)
   add_dependencies(onnxruntime_providers tensorboard)
   onnxruntime_add_include_to_target(onnxruntime_providers tensorboard)
