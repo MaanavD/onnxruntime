@@ -458,10 +458,11 @@ class InferenceSession {
 
   /**
    * Set the TunableResults back to each execution provider. Mainly for offline tuning.
+   * @param trs is the list of TunableResults to be loaded.
+   * @param error_on_invalid otherwise, validation faliure is not an error, only a warning log will be produced.
    * @return OK if success.
-   * @note Attempts to load unmatching TunableResults will only produce error log instead of error Status
    */
-  Status SetTuningResults(const std::vector<TuningResults>& tr);
+  Status SetTuningResults(const std::vector<TuningResults>& trs, bool error_on_invalid = false);
 #endif
 
 
