@@ -1,7 +1,5 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
-#include "core/common/gsl.h"
-#include "core/common/safeint.h"
 #include "contrib_ops/cuda/bert/cutlass_fmha/memory_efficient_attention.h"
 
 #if defined(__GNUC__)
@@ -9,7 +7,7 @@
 #pragma GCC diagnostic ignored "-Wunused-parameter"
 #endif
 
-#include "contrib_ops/cuda/bert/cutlass_fmha/kernel_forward.h"
+#include "41_fused_multi_head_attention/kernel_forward.h"
 
 namespace onnxruntime {
 namespace contrib {
@@ -56,12 +54,11 @@ void LaunchCutlassFmha(const MemoryEfficientAttentionParams& params) {
     p.q_strideM = params.num_heads * params.qk_head_size;
     p.k_strideM = params.num_heads * params.qk_head_size;
     p.v_strideM = params.num_heads * params.v_head_size;
-    p.o_strideM = params.num_heads * params.v_head_size;
 
-    p.q_strideB = SafeInt<size_t>(params.num_heads) * params.qk_head_size * params.sequence_length;
-    p.k_strideB = SafeInt<size_t>(params.num_heads) * params.qk_head_size * params.kv_sequence_length;
-    p.v_strideB = SafeInt<size_t>(params.num_heads) * params.v_head_size * params.kv_sequence_length;
-    p.o_strideB = SafeInt<size_t>(params.num_heads) * params.v_head_size * params.sequence_length;
+    p.q_strideB = static_cast<int64_t>(p.q_strideM) * params.sequence_length;
+    p.k_strideB = static_cast<int64_t>(p.k_strideM) * params.kv_sequence_length;
+    p.v_strideB = static_cast<int64_t>(p.v_strideM) * params.kv_sequence_length;
+    p.o_strideB = static_cast<int64_t>(params.num_heads) * params.v_head_size * params.sequence_length;
 
     p.causal = params.causal;
   }
