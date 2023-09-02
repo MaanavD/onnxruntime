@@ -1,5 +1,5 @@
 <script lang="ts">
-	import Table from '../components/table.svelte';
+	import Table from './table.svelte';
 </script>
 
 <div class="container mx-auto px-10 my-10">

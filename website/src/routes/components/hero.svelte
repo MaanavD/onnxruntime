@@ -1,15 +1,13 @@
 <script lang="ts">
-	import onnximage from '../../images/ONNX-Icon.svg';
 	import { onMount } from 'svelte';
 	import anime from 'animejs';
 	import { text } from '@sveltejs/kit';
 	import { Highlight } from 'svelte-highlight';
 	import { bash } from 'svelte-highlight/languages';
 	import FaRegClipboard from 'svelte-icons/fa/FaRegClipboard.svelte';
-	import OnnxIcon from '../../images/onnx-icon.svelte';
+	import OnnxIcon from '../../images/onnx-icon.svelte'
 	import { fade, fly, blur } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
-	import ONNXIcon from '../../images/onnx-icon.svelte'
 
 	let words = ['Cross-Platform', 'Python', 'C#', 'JavaScript', 'Java', 'C++'];
 	let activeWord = 'Cross-Platform';
@@ -68,14 +66,14 @@
 <!-- TODO: Interesting background -->
 
 <div class="hero bg-gradient-to-b from-primary">
-		<div class="cube">
+		<!-- <div class="cube">
 			<ONNXIcon width={10} height={10}/>
 		</div>
 		<div class="cube"><ONNXIcon width={10} height={50}/></div>
 		<div class="cube"><ONNXIcon width={10} height={10}/></div>
 		<div class="cube"><ONNXIcon width={10} height={10}/></div>
 		<div class="cube"><ONNXIcon width={10} height={10}/></div>
-		<div class="cube"><ONNXIcon width={10} height={10}/></div>
+		<div class="cube"><ONNXIcon width={10} height={10}/></div> -->
 	<div class="hero-content md:my-20">
 		<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
 			<div class="col-span-2 self-center md:mr-20">

@@ -4,9 +4,7 @@
     import CodeBlocks from "./components/code-blocks.svelte";
     import Performance from "./components/performance.svelte";
     import CrossPlatform from "./components/cross-platform.svelte";
-    import GenerativeAi from "./components/generative-ai.svelte";
-    import Table from "./components/table.svelte"
-    import Stats from "./components/stats.svelte";
+    import GenerativeAi from "./components/generative-ai-hero.svelte";
     import TrainingInference from "./components/training-inference.svelte";
     import WebMobile from "./components/web-mobile.svelte"
 	import IoIosClose from 'svelte-icons/io/IoIosClose.svelte';

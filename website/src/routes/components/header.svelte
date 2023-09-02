@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
-	import onnximage from '../../images/ONNX-Icon.svg';
 	import FaGithub from 'svelte-icons/fa/FaGithub.svelte';
 	import FaYoutube from 'svelte-icons/fa/FaYoutube.svelte';
 	import FaLinkedinIn from 'svelte-icons/fa/FaLinkedinIn.svelte';

@@ -14,7 +14,7 @@
 			<figure class="px-10 pt-10">
 				<img
 					src=""
-					alt="Shoes"
+					alt=""
 					class="rounded-xl"
 				/>
 			</figure>
@@ -27,7 +27,7 @@
 			<figure class="px-10 pt-10">
 				<img
 					src=""
-					alt="Shoes"
+					alt=""
 					class="rounded-xl"
 				/>
 			</figure>
@@ -40,7 +40,7 @@
 			<figure class="px-10 pt-10">
 				<img
 					src=""
-					alt="Shoes"
+					alt=""
 					class="rounded-xl"
 				/>
 			</figure>
