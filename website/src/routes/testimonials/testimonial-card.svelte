@@ -31,14 +31,14 @@
         <p class="text-secondary text-right">-{author}</p>
 	</div>
 </article> -->
-<article on:mouseenter={handleEnter} on:mouseleave={handleLeave} class="max-w-md mx-auto bg-base-300 rounded-sm overflow-hidden md:max-w-2xl">
+<article on:mouseenter={handleEnter} on:mouseleave={handleLeave} class="max-w-md mx-auto bg-blue-100 rounded-sm overflow-hidden md:max-w-2xl">
 	<div class="md:flex">
 	  <div class="md:shrink-0 my-auto">
 		<img class="md:h-48 w-full" src={imgsrc} alt={imgalt}>
 	  </div>
 	  <div class="p-8">
-		<p class="block mt-1 text-lg leading-tight font-medium text-black">{title}</p>
-		<p class="mt-2 text-slate-500">{description}</p>
+		<p class="block mt-1 leading-tight font-bold text-neutral text-lg">{title}</p>
+		<p class="mt-2 text-neutral">{description}</p>
 		<br/>
 		<p class="text-secondary text-right">-{author}</p>
 	  </div>

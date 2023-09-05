@@ -22,7 +22,7 @@
 
 <article on:mouseenter={handleEnter} on:mouseleave={handleLeave} class="m-4 md:m-10 bg-base-300 border rounded-md border-primary">
 	<a href={link}>
-		<div class="card h-full" data-svelte-h="svelte-1oufy6g">
+		<div class="card h-full">
 			<div class="card-body">
 				<h2 class="card-title">{title}</h2>
 				<p>{description}</p>
