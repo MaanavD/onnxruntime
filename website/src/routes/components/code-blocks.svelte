@@ -52,10 +52,10 @@
 	<div class="grid-cols-1 lg:grid-cols-3 gap-4 grid">
 		<div class="col-span-1 mx-auto mx-4 lg:mx-0 lg:ml-10">
 			<h1 class="text-xl mb-4">Use ONNX Runtime with your favorite language, or dive right into the tutorials.</h1>
-				<button class="btn btn-block mb-4">Quickstart</button>
-				<button class="btn btn-block mb-4">Tutorials</button>
-				<button class="btn btn-block mb-4">Install ONNX Runtime</button>
-				<button class="btn btn-block mb-4">Hardware acceleration</button>
+				<button class="btn btn-secondary rounded-sm btn-block mb-4 text-slate-100">Quickstart</button>
+				<button class="btn btn-secondary rounded-sm btn-block mb-4 text-slate-100">Tutorials</button>
+				<button class="btn btn-secondary rounded-sm btn-block mb-4 text-slate-100">Install ONNX Runtime</button>
+				<button class="btn btn-secondary rounded-sm btn-block mb-4 text-slate-100">Hardware acceleration</button>
 		</div>
 		<div class="hidden lg:block col-span-2 mx-auto tab-container">
 			<div class="tabs">

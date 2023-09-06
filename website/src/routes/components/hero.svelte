@@ -66,14 +66,6 @@
 <!-- TODO: Interesting background -->
 
 <div class="hero bg-gradient-to-b from-primary">
-		<!-- <div class="cube">
-			<ONNXIcon width={10} height={10}/>
-		</div>
-		<div class="cube"><ONNXIcon width={10} height={50}/></div>
-		<div class="cube"><ONNXIcon width={10} height={10}/></div>
-		<div class="cube"><ONNXIcon width={10} height={10}/></div>
-		<div class="cube"><ONNXIcon width={10} height={10}/></div>
-		<div class="cube"><ONNXIcon width={10} height={10}/></div> -->
 	<div class="hero-content md:my-20">
 		<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
 			<div class="col-span-2 self-center md:mr-20">
@@ -119,7 +111,7 @@
 					<a class="underline" href="http://">More interested in training? More info here.</a>
 				</p> -->
 				<p class="text-lg mt-2">
-					<a class="text-blue-500" href="http://">Don't see your favourite platform? See the many others we support →</a>
+					<a class="text-blue-500" href="/getting-started">Don't see your favourite platform? See the many others we support →</a>
 				</p>
 			</div>
 			<div class="hidden lg:inline">
@@ -128,74 +120,3 @@
 		</div>
 	</div>
 </div>
-<style>
-	@import url("https://fonts.googleapis.com/css?family=Montserrat:700");
-.hero {
-  position: relative;
-  overflow: hidden;
-}
-
-.cube {
-  position: absolute;
-  top: 80vh;
-  left: 45vw;
-  width: 10px;
-  height: 10px;
-  transform-origin: top left;
-  transform: scale(0) rotate(0deg) translate(-50%, -50%);
-  -webkit-animation: cube 30s ease-in forwards infinite;
-          animation: cube 30s ease-in forwards infinite;
-}
-.cube:nth-child(2) {
-  -webkit-animation-delay: 2s;
-          animation-delay: 2s;
-  left: 25vw;
-  top: 40vh;
-}
-.cube:nth-child(3) {
-  -webkit-animation-delay: 4s;
-          animation-delay: 4s;
-  left: 75vw;
-  top: 50vh;
-}
-.cube:nth-child(4) {
-  -webkit-animation-delay: 6s;
-          animation-delay: 6s;
-  left: 90vw;
-  top: 10vh;
-}
-.cube:nth-child(5) {
-  -webkit-animation-delay: 8s;
-          animation-delay: 8s;
-  left: 10vw;
-  top: 85vh;
-}
-.cube:nth-child(6) {
-  -webkit-animation-delay: 10s;
-          animation-delay: 10s;
-  left: 50vw;
-  top: 10vh;
-}
-
-@-webkit-keyframes cube {
-  from {
-    transform: scale(0) rotate(0deg) translate(-50%, -50%);
-    opacity: 0.5;
-  }
-  to {
-    transform: scale(20) rotate(960deg) translate(-50%, -50%);
-    opacity: 0;
-  }
-}
-
-@keyframes cube {
-  from {
-    transform: scale(0) rotate(0deg) translate(-50%, -50%);
-    opacity: 0.5;
-  }
-  to {
-    transform: scale(20) rotate(960deg) translate(-50%, -50%);
-    opacity: 0;
-  }
-}
-</style>

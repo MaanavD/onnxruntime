@@ -3,8 +3,10 @@
 
 	import Blog from './blog-post.svelte';
 	import FeaturedBlog from './blog-post-featured.svelte';
+	import blogsimage from '../../images/undraw/image_blogs.svelte'
 	import anime from 'animejs';
 	import { onMount } from 'svelte';
+	import ImageBlogs from '../../images/undraw/image_blogs.svelte';
 	onMount(() => {
 		anime({
 			targets: '.border-primary',
@@ -200,7 +202,12 @@
 </script>
 
 <div class="container mx-auto">
-	<h1 class="text-5xl">Blogs & Announcements</h1>
+	<div class="flex">
+		<h1 class="text-5xl my-auto mr-5">Blogs & Announcements</h1>
+		<div class="hidden md:flex">
+			<ImageBlogs/>
+		</div>
+	</div>
 	<div class="pt-5">
 		<h3 class="text-3xl pb-4 md:pb-0">Featured posts</h3>
 		<div class="grid md:grid-cols-3">

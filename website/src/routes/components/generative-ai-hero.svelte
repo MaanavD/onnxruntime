@@ -1,3 +1,6 @@
+<script>
+	import Ortgenerativeai from "../../images/undraw/image_ortgenerativeai.svelte";
+</script>
 <div class="container mx-auto px-10 mb-10">
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 		<div class="">
@@ -11,6 +14,8 @@
 			<br>
 			<a href="/generative-ai" class="btn btn-primary">Learn more about ORT & Generative AI →</a>
 		</div>
-		<img class="m-auto" src="https://placehold.co/600x300" alt="" />
+		<div class="m-auto">
+			<Ortgenerativeai/>
+		</div>
 	</div>
 </div>

@@ -1,3 +1,6 @@
+<script>
+	import Ortperf from "../../images/undraw/image_ortperf.svelte";
+</script>
 <div class="container mx-auto px-10 mb-10">
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 		<div class="">
@@ -13,6 +16,8 @@
 				performance for specific use cases and models..
 			</p>
 		</div>
-    <img class="m-auto" src="https://placehold.co/600x300" alt="" />
+		<div class="m-auto overflow:hidden">
+			<Ortperf/>
+		</div>
 	</div>
 </div>

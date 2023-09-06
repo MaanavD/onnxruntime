@@ -23,8 +23,8 @@
 	<div />
 	<div>
 		<span class="footer-title">Get Started</span>
-		<a class="link link-hover">Install</a>
-		<a class="link link-hover">PyTorch</a>
+		<a href="/getting-started" class="link link-hover">Install</a>
+		<a href="/pytorch" class="link link-hover">PyTorch</a>
 	</div>
 	<div>
 		<!-- TODO: Approach to not hide resources behind popup -->

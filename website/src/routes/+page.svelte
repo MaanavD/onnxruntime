@@ -6,6 +6,7 @@
     import CrossPlatform from "./components/cross-platform.svelte";
     import GenerativeAi from "./components/generative-ai-hero.svelte";
     import TrainingInference from "./components/training-inference.svelte";
+	import TrainingAndInference from "./components/training-and-inference.svelte";
     import WebMobile from "./components/web-mobile.svelte"
 	import IoIosClose from 'svelte-icons/io/IoIosClose.svelte';
 	import { onMount } from 'svelte';
@@ -37,8 +38,9 @@
 <GenerativeAi/>
 <CrossPlatform/>
 <Performance/>
-<TrainingInference/>
-<WebMobile/>
+<!-- <TrainingInference/>
+<WebMobile/> -->
+<TrainingAndInference/>
 
 <div class="toast z-10 opacity-0 hidden">
 	<div class="alert alert-info">
