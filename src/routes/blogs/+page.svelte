@@ -6,10 +6,15 @@
 	import anime from 'animejs';
 	import { onMount } from 'svelte';
 	import ImageBlogs from '../../images/undraw/image_blogs.svelte';
+	import HFImage from '../../images/blogs/hugging-face-blog-img.png';
+	import LlamaImage from '../../images/blogs/accelerating-llama-2/Figure1-LLaMA-2-7B-E2E-Throughput.png';
+	import SDXLTurboImage from '../../images/blogs/sdxl_blog_thumbnail.png';
+	import { createEventDispatcher } from 'svelte';
+	import WebTrainingImage from '../../images/blogs/webtraining_blog_thumbnail.png';
 	onMount(() => {
 		anime({
 			targets: '.border-primary',
-			translateY: -20,
+			translateY: -5,
 			direction: 'alternate',
 			loop: false,
 			delay: function (el, i, l) {
@@ -20,14 +25,65 @@
 			}
 		});
 	});
+
+	let showBlogs = true;
+	const dispatch = createEventDispatcher();
+
+	onMount(() => {
+		dispatch('switchTab', 'blogs');
+	});
+
+	function switchTab(tab) {
+		showBlogs = tab === 'blogs';
+		dispatch('switchTab', tab);
+	}
 	let featuredblog = [
+		{
+			title: 'On-Device Training: Training a model in browser',
+			date: 'February 6th, 2024',
+			blurb:
+				'Want to do ML training for your website in-browser? Learn more about what web training with ONNX Runtime has to offer in our blog below and experiment with your own applications through our easy-to-follow tutorials and demo.',
+			link: 'https://cloudblogs.microsoft.com/opensource/2024/02/06/on-device-training-training-a-model-in-browser',
+			image: WebTrainingImage,
+			imgalt: 'Components of the onnxruntime-web JS package'
+		},
+		{
+			title: 'Accelerating SD Turbo and SDXL Turbo Inference with ONNX Runtime and Olive',
+			date: 'January 15th, 2024',
+			blurb:
+				'With ONNX Runtime and Olive, users can easily accelerate SD Turbo and SDXL Turbo models to generate viable images in as little as one step!',
+			link: 'https://huggingface.co/blog/sdxl_ort_inference',
+			image: SDXLTurboImage,
+			imgalt: 'SD Turbo and SDXL Turbo models with ONNX Runtime and Olive'
+		},
+		{
+			title: 'Accelerating LLaMA-2 Inference with ONNX Runtime',
+			date: 'November 14th, 2023',
+			blurb: 'Learn how ONNX Runtime can speed up LLaMA-2 inference by up to 4.5X',
+			link: 'blogs/accelerating-llama-2',
+			image: LlamaImage,
+			imgalt: 'LLaMA-2 e2e throughput'
+		}
+	];
+	let blogs = [
 		{
 			title: 'Run PyTorch models on the edge',
 			date: 'October 12th, 2023',
 			blurb:
 				'Everything you need to know about running PyTorch models on the edge with ONNX Runtime.',
 			link: 'blogs/pytorch-on-the-edge',
-			image: 'https://onnxruntime.ai/_app/immutable/assets/pytorch-on-the-edge-with-ort.cdaa9c84.png'
+			image:
+				'https://onnxruntime.ai/_app/immutable/assets/pytorch-on-the-edge-with-ort.cdaa9c84.png',
+			imgalt: 'Run PyTorch models on the edge'
+		},
+		{
+			title: 'Accelerating over 130,000 Hugging Face models with ONNX Runtime',
+			date: 'October 4th, 2023',
+			blurb:
+				'Learn more on how ONNX Runtime helps users accelerate open source machine learning models from Hugging Face.',
+			link: 'https://cloudblogs.microsoft.com/opensource/2023/10/04/accelerating-over-130000-hugging-face-models-with-onnx-runtime/',
+			image: HFImage,
+			imgalt: 'Hugging Face models with ONNX Runtime'
 		},
 		{
 			title: 'On-Device Training with ONNX Runtime: A deep dive',
@@ -35,7 +91,8 @@
 			blurb:
 				'This blog presents technical details of On-Device training with ONNX Runtime. It explains how On-Device Training works and what are the different steps and artifacts involved in the training process. This information will help you train your models on edge devices.',
 			link: 'https://cloudblogs.microsoft.com/opensource/2023/07/05/on-device-training-with-onnx-runtime-a-deep-dive/',
-			image: 'https://cloudblogs.microsoft.com/opensource/wp-content/uploads/sites/37/2023/06/Open-Source-1.webp'
+			image:
+				'https://cloudblogs.microsoft.com/opensource/wp-content/uploads/sites/37/2023/06/Open-Source-1.webp'
 		},
 		{
 			title:
@@ -45,9 +102,7 @@
 				'Learn how ONNX Runtime accelerates Whisper and makes it easy to deploy on desktop, mobile, in the cloud, and even in the browser.',
 			link: 'https://medium.com/microsoftazure/build-and-deploy-fast-and-portable-speech-recognition-applications-with-onnx-runtime-and-whisper-5bf0969dd56b',
 			image: 'https://miro.medium.com/v2/resize:fit:1100/format:webp/1*DJH8_6GS06-N32tkVhdTOw.png'
-		}
-	];
-	let blogs = [
+		},
 		{
 			title: 'On-Device Training: Efficient training on the edge with ONNX Runtime',
 			date: 'May 31st, 2023',
@@ -216,6 +271,28 @@
 			link: 'https://cloudblogs.microsoft.com/opensource/2021/06/30/journey-to-optimize-large-scale-transformer-model-inference-with-onnx-runtime/'
 		}
 	];
+	let blogsCommunity = [
+		{
+			title: 'AMD expands its AI and ML development tools with ROCm 6.0',
+			date: 'February 15, 2024',
+			link: 'https://overclock3d.net/news/software/amd-expands-its-ai-and-machine-learning-development-tools-with-rocm-6-0-with-expanded-gpu-support/',
+			blurb:
+				'ROCm 6.0 features support for the ONNX runtime. This support enhances AI development capabilities and interoperability.'
+		},
+		{
+			title: 'UC San Diego Students Win MLPerf Contest at SC23',
+			date: 'February 2, 2024',
+			blurb:
+				'During the annual Student Cluster Competition (SCC), UC San Diego undergraduate students achieved third place. Their success was fueled by optimizing performance using industry benchmarks, including the MLPerf Inference Benchmark. The seamless support for PyTorch and ONNX Runtime enabled them to port and fine-tune their code efficiently.',
+			link: 'https://www.hpcwire.com/off-the-wire/uc-san-diego-students-win-mlperf-contest-at-sc23/'
+		},	
+		{
+			title: 'Human Capital Management (HCM) - Sentence Similarity Language Model using Java',
+			date: 'December 5, 2023',
+			blurb: 'Using ONNX Runtime, the HCM team was able to deploy a sentence similarity language model using Java, demonstrating how easy it is to use with multiple languages.',
+			link: 'https://www.linkedin.com/pulse/hcm-sentence-similarity-language-model-using-java-jonathon-palmieri-tdlpc%3FtrackingId=CN2PPVO4Toqh8r6JsAYMIw%253D%253D/?trackingId=ByNomo0pQFKM%2F%2BWEknVs7Q%3D%3D'
+		}
+	];
 </script>
 
 <svelte:head>
@@ -245,12 +322,35 @@
 			{/each}
 		</div>
 	</div>
-	<div class="mx-4 md:mx-10">
-		<h3 class="text-3xl pb-8">Recent posts</h3>
-		<div class="grid gap-4 grid-cols-1 md:grid-cols-2">
-			{#each blogs as blog, i}
-				<Blog title={blog.title} description={blog.blurb} date={blog.date} link={blog.link} />
-			{/each}
+	<div class="mx-4">
+		<div role="tablist" class="tabs tabs-bordered tabs-lg mb-10">
+			<button
+				role="tab"
+				tabindex="0"
+				class="tab text-3xl {showBlogs ? 'tab-active' : ''}"
+				on:click={() => switchTab('blogs')}
+				on:keypress={() => switchTab('blogs')}>Recent posts</button
+			>
+			<button
+				tabindex="0"
+				role="tab"
+				class="tab text-3xl {!showBlogs ? 'tab-active' : ''}"
+				on:click={() => switchTab('community')}
+				on:keypress={() => switchTab('community')}>Community Posts</button
+			>
 		</div>
+		{#if showBlogs}
+			<div class="grid gap-4 grid-cols-1 md:grid-cols-2 mx-0 md:mx-6">
+				{#each blogs as blog, i}
+					<Blog title={blog.title} description={blog.blurb} date={blog.date} link={blog.link} />
+				{/each}
+			</div>
+		{:else}
+			<div class="grid gap-4 grid-cols-1 md:grid-cols-2 mx-0 md:mx-6">
+				{#each blogsCommunity as blog, i}
+					<Blog title={blog.title} description={blog.blurb} date={blog.date} link={blog.link} />
+				{/each}
+			</div>
+		{/if}
 	</div>
 </div>
