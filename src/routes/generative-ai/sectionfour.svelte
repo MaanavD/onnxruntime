@@ -52,8 +52,8 @@ img {
 }
 .image2 {
   position: absolute;
-  bottom: 450px;
-  right: 100px;
+  top: 50px;
+  left: 900px;
   width: 10%;
   height: 20;
   padding: 10;
@@ -79,7 +79,7 @@ img {
 
 @media (min-width: 1201px) {
     img {
-        width: 100%; /* Quarter width on large screens */
+        width: 50%; /* Quarter width on large screens */
     }
 }
 
@@ -96,15 +96,15 @@ img {
 </div>
 <!-- Card border, set the border color and structure. the title will be in the border. -->
 <div>
-  <div class="card bg-base-300 text-primary-content w-100 border-4 border-cyan-400 h-128 w-150 p-0">
-      <h2 class="card-title justify-start text-4xl bg-base-300 rounded-box">Why ONNX Runtime?</h2>
+  <div class="card bg-base-200 text-primary-content w-100 border-4 border-cyan-400 h-128 w-150 p-10">
+      <h2 class="card-title justify-start text-4xl bg-base-200 rounded-box">Why ONNX Runtime?</h2>
     <div class="flex w-full flex-col">
         <div class="h-14 w-170 bg-gradient-to-r from-bg-base-200 to-cyan-500"></div>
-        <div class="card bg-base-300 rounded-box grid h-200 w-100 place-items-center shadow-sm hover:bg-primary text-2xl p-5">Supports the Open Neural Network Exchange, models trained from different frameworks can be converted to the ONNX format and run on all supported platforms.</div>
+        <div class="card bg-base-200 rounded-box grid h-200 w-100 place-items-center shadow-sm text-2xl p-5">Supports the Open Neural Network Exchange, models trained from different frameworks can be converted to the ONNX format and run on all supported platforms.</div>
         <div class="h-14 w-170 bg-gradient-to-r from-bg-base-200 to-cyan-500"></div>
-        <div class="card bg-base-300 rounded-box grid h-200 w-100 place-items-center shadow-sm hover:bg-primary text-2xl p-5">Runs on a variety of hardware, but its execution provider interface also allows it to efficiently utilize accelerators specific to each hardware.</div>
+        <div class="card bg-base-200 rounded-box grid h-200 w-100 place-items-center shadow-sm text-2xl p-5">Runs on a variety of hardware, but its execution provider interface also allows it to efficiently utilize accelerators specific to each hardware.</div>
         <div class="h-14 w-170 bg-gradient-to-r from-bg-base-200 to-cyan-500"></div>
-        <div class="card bg-base-300 rounded-box grid h-200 w-100 place-items-center shadow-sm hover:bg-primary text-2xl p-5">Serves not only as a runtime engine but as a platform where many inference engines can be supported.</div>
+        <div class="card bg-base-200 rounded-box grid h-200 w-100 place-items-center shadow-sm text-2xl p-5">Serves not only as a runtime engine but as a platform where many inference engines can be supported.</div>
         <div class="h-14 w-170 bg-gradient-to-r from-bg-base-200 to-cyan-500"></div>
     </div>
 </div>
