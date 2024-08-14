@@ -6,7 +6,7 @@
 	export let link: string;
 	export let image: string;
 	export let imagealt: string;
-	export let linkarr: { name: string, link: string}[];
+	export let linkarr: { name: string; link: string }[];
 	let handleEnter = (e: any) => {
 		anime({
 			targets: e.target,
@@ -33,7 +33,7 @@
 			<div class="card-body col-span-3 md:col-span-2">
 				<h2 class="card-title">{title}</h2>
 				<p>{description}</p>
-				<p class="text-blue-500 text-right">
+				<p class="text-blue-700 text-right">
 					{date}
 				</p>
 				<div class="card-actions">

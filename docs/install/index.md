@@ -15,11 +15,10 @@ Details on OS versions, compilers, language versions, dependent libraries, etc c
 under [Compatibility](../reference/compatibility).
 
 ## Contents
-
 {: .no_toc }
 
 * TOC placeholder
-  {:toc}
+{:toc}
 
 ## Requirements
 
@@ -30,6 +29,12 @@ under [Compatibility](../reference/compatibility).
 * Windows builds
   require [Visual C++ 2019 runtime](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads).
   The latest version is recommended.
+
+### CUDA and CuDNN
+For ONNX Runtime GPU package, it is required to install [CUDA](https://developer.nvidia.com/cuda-toolkit) and [cuDNN](https://developer.nvidia.com/cudnn). Check [CUDA execution provider requirements](../execution-providers/CUDA-ExecutionProvider.md#requirements) for compatible version of CUDA and cuDNN.
+* cuDNN 8.x requires ZLib. Follow the [cuDNN 8.9 installation guide](https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-890/install-guide/index.html) to install zlib in Linux or Windows. Note that the official gpu package does not support cuDNN 9.x.
+* The path of CUDA bin directory must be added to the PATH environment variable. 
+* In Windows, the path of cuDNN bin directory must be added to the PATH environment variable.
 
 ## Python Installs
 
@@ -42,20 +47,24 @@ pip install onnxruntime
 ```
 
 #### Install ONNX Runtime GPU (CUDA 11.x)
-
-The default CUDA version for ORT is 11.8
+The default CUDA version for ORT is 11.8.
 
 ```bash
 pip install onnxruntime-gpu
 ```
 
 #### Install ONNX Runtime GPU (CUDA 12.x)
-
 For Cuda 12.x, please use the following instructions to install from [ORT Azure Devops Feed](https://aiinfra.visualstudio.com/PublicPackages/_artifacts/feed/onnxruntime-cuda-12/PyPI/onnxruntime-gpu/overview)
 
 ```bash
 pip install onnxruntime-gpu --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/
 ```
+
+#### Install ONNX Runtime GPU (ROCm)
+For ROCm, please follow instructions to install it at the [AMD ROCm install docs](https://rocm.docs.amd.com/projects/install-on-linux/en/docs-6.0.0/). The ROCm execution provider for ONNX Runtime is built and tested with ROCm 6.0.0
+
+To build from source on Linux, follow the instructions [here](https://onnxruntime.ai/docs/build/eps.html#amd-rocm). Alternatively, each major ORT release has a corresponding C/C++ ROCm package, found [here](https://github.com/microsoft/onnxruntime/releases/). 
+
 
 ### Install ONNX to export the model
 

@@ -1,9 +1,9 @@
 ---
 title: Config reference
-description: Reference for the ONNX Runtime Generative AI configuration file
+description: Reference for the ONNX Runtime generate() API configuration file
 has_children: false
 parent: Reference
-grand_parent: Generative AI (Preview)
+grand_parent: Generate API (Preview)
 nav_order: 1
 ---
 
@@ -102,6 +102,10 @@ These are the options that are passed to ONNX Runtime, which runs the model on e
 
 * **_provider_options_**: a prioritized list of execution targets on which to run the model. If running on CPU, this option is not present. A list of execution provider specific configurations can be specified inside the provider item.
 
+  Supported provider options:
+  * `cuda`
+  * `dml`
+
 * **_log_id_**: a prefix to output when logging.
 
 
@@ -142,7 +146,7 @@ Then for each model in the pipeline there is one section, named by the model.
 
 * **_top_p_**: Only includes the most probable tokens with probabilities that add up to `P` or higher. Defaults to `1`, which includes all of the tokens. Range is 0 to 1, exclusive of 0.
 
-* **_temperature_**: The temperature value scales the probability of each token so that probable tokens become more likely while less probable ones become less likely. This value can have a range  0 < `temperature` ≤ 1. When temperature is equal to `1`, it has no effect.
+* **_temperature_**: The temperature value scales the scores of each token so that lower a temperature value leads to a sharper distribution.
 
 * **_repetition_penalty_**: Discounts the scores of previously generated tokens if set to a value greater than `1`. Defaults to `1`. 
 

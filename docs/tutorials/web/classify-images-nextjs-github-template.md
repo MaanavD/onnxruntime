@@ -4,7 +4,7 @@ description: Classify images in a NextJS web application built from a GitHub tem
 parent: Web
 grand_parent: Tutorials
 has_children: false
-nav_order: 1
+nav_order: 9
 ---
 
 
@@ -291,10 +291,10 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: './node_modules/onnxruntime-web/dist/ort-wasm.wasm',
+          from: './node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm',
           to: 'static/chunks/pages',
         },             {
-          from: './node_modules/onnxruntime-web/dist/ort-wasm-simd.wasm',
+          from: './node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.mjs',
           to: 'static/chunks/pages',
         },          
           {

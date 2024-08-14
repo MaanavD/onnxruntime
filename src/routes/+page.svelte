@@ -10,26 +10,25 @@
 	import IoIosClose from 'svelte-icons/io/IoIosClose.svelte';
 	import { onMount } from 'svelte';
 	import anime from 'animejs';
-	import Saos from 'saos';
 
 	let removetoast = (e: any) => {
 		e.target.parentNode.parentNode.remove();
 	};
 
 	let videos = [
-        {
-            title: 'What is ONNX Runtime (ORT)?',
-            link: 'https://www.youtube-nocookie.com/embed/M4o4YRVba4o?si=LHc-2AhKt3TrY60g'
-        },
-        {
-            title: 'Converting Models to ONNX Format',
-            link: 'https://www.youtube-nocookie.com/embed/lRBsmnBE9ZA?si=l5i0Q2P7VtSJyGK1'
-        },
-        {
-            title: 'Optimize Training and Inference with ONNX Runtime (ORT/ACPT/DeepSpeed)',
-            link: 'https://www.youtube-nocookie.com/embed/lC7d_7waHLM?si=U4252VEd1t5ioZUN'
-        }
-    ];
+		{
+			title: 'What is ONNX Runtime (ORT)?',
+			link: 'https://www.youtube-nocookie.com/embed/M4o4YRVba4o?si=LHc-2AhKt3TrY60g'
+		},
+		{
+			title: 'Converting Models to ONNX Format',
+			link: 'https://www.youtube-nocookie.com/embed/lRBsmnBE9ZA?si=l5i0Q2P7VtSJyGK1'
+		},
+		{
+			title: 'Optimize Training and Inference with ONNX Runtime (ACPT/DeepSpeed)',
+			link: 'https://www.youtube-nocookie.com/embed/lC7d_7waHLM?si=U4252VEd1t5ioZUN'
+		}
+	];
 
 	onMount(() => {
 		anime({
@@ -43,26 +42,36 @@
 			}
 		});
 	});
+	let description = 'Cross-platform accelerated machine learning. Built-in optimizations speed up training and inferencing with your existing technology stack.'
+	let image = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
+	let imageSquare = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
+	let authors = ['']
+	let keywords = 'onnx runtime, onnx, onnxruntime, onnx runtime performance, onnx runtime training, onnx runtime inference, onnx runtime cross-platform, onnx runtime cross platform, onnx runtime crossplatform, onnx runtime training and inference, onnx runtime training & inference, onnx runtime training inference, onnx runtime training, onnx runtime inference, onnx runtime cross-platform, onnx runtime cross platform, onnx runtime crossplatform, onnx runtime training and inference, onnx runtime training & inference, onnx runtime training inference'
 </script>
+<svelte:head>
+	<!-- Dynamic meta tags -->
+	<meta name="description" content={description} />
+	<meta name="image" content={image} />
+	<meta name="author" content={authors.join(', ')} />
+	<meta name="keywords" content={keywords} />
+	<!-- Open Graph / Facebook -->
+	<meta property="og:description" content={description}/>
+	<meta property="og:image" content={image} />
+	
+	<!-- Twitter -->
+	<meta property="twitter:description" content={description} />
+	<meta property="twitter:image" content={image} />
+	<meta property="twitter:card" content={imageSquare} />
+</svelte:head>
 
 <Hero />
 <Customers />
 <CodeBlocks />
-<VideoGallery {videos}/>
-<Saos once={true} animation={'slide-in-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'}>
-	<GenerativeAi />
-</Saos>
-<Saos once={true} animation={'slide-in-right 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'}>
-	<CrossPlatform />
-</Saos>
-<Saos once={true} animation={'slide-in-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'}>
-	<Performance />
-</Saos>
-
-<Saos once={true} animation={'slide-in-bottom 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both'}>
-	<TrainingAndInference />
-</Saos>
-
+<VideoGallery {videos} />
+<GenerativeAi />
+<CrossPlatform />
+<Performance />
+<TrainingAndInference />
 <div class="toast z-10 opacity-0 hidden">
 	<div class="alert alert-info">
 		<svg

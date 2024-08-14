@@ -7,8 +7,8 @@
 
 <div class="container mx-auto px-{px} my-{my}">
 	{#if title == true}
-		<h1 class="text-4xl">Videos</h1>
-		<h1 class="text-2xl">Check out some of our videos to help you get started!</h1>
+		<h2 class="text-4xl">Videos</h2>
+		<p class="text-2xl">Check out some of our videos to help you get started!</p>
 	{/if}
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mx-auto my-{my}">
 		{#each videos as video}
@@ -29,9 +29,9 @@
 			</div>
 		{/each}
 	</div>
-    {#if title == true}
-	<a href="https://www.youtube.com/@ONNXRuntime" class="btn rounded-sm btn-primary mr-4">
-		ONNX Runtime YouTube channel →
-	</a>
-    {/if}
+	{#if title == true}
+		<a href="https://www.youtube.com/@ONNXRuntime" class="btn rounded-sm btn-primary mr-4">
+			ONNX Runtime YouTube channel →
+		</a>
+	{/if}
 </div>

@@ -4,8 +4,11 @@
 	import adobelogo from '../../images/logos/adobe-logo.png';
 	import amdlogo from '../../images/logos/amd-logo.png';
 	import antgrouplogo from '../../images/logos/antgroup-logo.png';
+	import algoriddimLogo from '../../images/logos/algoriddim-logo.png';
 	import atlaslogo from '../../images/logos/ATLAS-logo.png';
 	import bazaarvoicelogo from '../../images/logos/bazaarvoice-logo.png';
+	import camologo from '../../images/logos/camo-logo.png';
+	import cephablelogo from '../../images/logos/cephable-logo.png';
 	import clearbladelogo from '../../images/logos/clearblade-logo.png';
 	import deezerlogo from '../../images/logos/deezer-logo.png';
 	import intelligenzaeticablogo from '../../images/logos/intelligenza-etica-logo.png';
@@ -37,8 +40,7 @@
 			title: 'Adobe',
 			quote:
 				'With ONNX Runtime, Adobe Target got flexibility and standardization in one package: flexibility for our customers to train ML models in the frameworks of their choice, and standardization to robustly deploy those models at scale for fast inference, to deliver true, real-time personalized experiences.',
-			author:
-				'Georgiana Copil, Senior Computer Scientist, Adobe',
+			author: 'Georgiana Copil, Senior Computer Scientist, Adobe',
 			imgsrc: adobelogo,
 			imgalt: 'Adobe logo'
 		},
@@ -60,6 +62,14 @@
 			imgalt: 'Ant Group logo'
 		},
 		{
+			title: 'Algoriddim',
+			quote:
+				'At Algoriddim we are using ONNX Runtime on Windows devices to power our Neural Mix™ feature that allows users to isolate vocal and instruments of any song in real-time, as well as our Automix feature that allows for seamless automatic DJ mixes. ONNX Runtime strikes the perfect balance between abstraction and flexibility, and using the QNN execution provider allows us to leverage the NPU on Copilot+ PCs for unparalleled inference performance while keeping the CPU free for other tasks.',
+			author: 'Frederik Seiffert, CTO, Algoriddim',
+			imgsrc: algoriddimLogo,
+			imgalt: 'Algoriddim logo'
+		},
+		{
 			title: 'Atlas Experiment',
 			quote:
 				'At CERN in the ATLAS experiment, we have integrated the C++ API of ONNX Runtime into our software framework: Athena. We are currently performing inferences using ONNX models especially in the reconstruction of electrons and muons. We are benefiting from its C++ compatibility, platform*-to-ONNX converters (* Keras, TensorFlow, PyTorch, etc) and its thread safety.',
@@ -74,6 +84,22 @@
 			author: 'Matthew Leyburn, Software Engineer, Bazaarvoice',
 			imgsrc: bazaarvoicelogo,
 			imgalt: 'Bazaarvoice logo'
+		},
+		{
+			title: 'Camo',
+			quote:
+				"ONNX Runtime enables Camo Studio to deliver features like background segmentation and feature detection with speed and accuracy. It seamlessly integrated with our existing models and lets us target any processor, including the latest NPUs, saving us valuable development time and allowing us to bring innovative features to all our users. We recommend ONNX Runtime to any developer looking to streamline model deployment and unlock the full potential of their applications.",
+			author: 'Aidan Fitzpatrick, Founder & CEO, Reincubate',
+			imgsrc: camologo,
+			imgalt: 'Camo logo'
+		},
+		{
+			title: 'Cephable',
+			quote:
+				"The ONNX Runtime allows us to simultaneously target CPU, GPU and NPU enabled devices. Converting a model to NPU, using ONNX Runtime and AI Hub reduced our engineering effort from 30 days to 7 days. Given the current state of the art, that would likely be only 3 days today. This allows us to deliver cutting edge performance to our users, minimizing impact of AI/ML workloads when running other applications, and leaves more time to focus on feature work.",
+			author: 'Jon Campbell, Director of Engineering, Cephable',
+			imgsrc: cephablelogo,
+			imgalt: 'Cephable logo'
 		},
 		{
 			title: 'ClearBlade',
@@ -279,10 +305,26 @@
 			imgalt: 'Xilinx logo'
 		}
 	];
+	let description = "ONNX Runtime's many consumer testimonials. Hear from some of the products and companies using ONNX Runtime."
+	let image = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
+	let imageSquare = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
+	let authors = ['']
+	let keywords = 'onnx runtime testimonials'
 </script>
-
 <svelte:head>
-	<meta name="description" content="ONNX Runtime's many customer testimonials." />
+	<!-- Dynamic meta tags -->
+	<meta name="description" content={description} />
+	<meta name="image" content={image} />
+	<meta name="author" content={authors.join(', ')} />
+	<meta name="keywords" content={keywords} />
+	<!-- Open Graph / Facebook -->
+	<meta property="og:description" content={description}/>
+	<meta property="og:image" content={image} />
+	
+	<!-- Twitter -->
+	<meta property="twitter:description" content={description} />
+	<meta property="twitter:image" content={image} />
+	<meta property="twitter:card" content={imageSquare} />
 </svelte:head>
 
 <div class="container mx-auto">

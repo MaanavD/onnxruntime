@@ -1,9 +1,9 @@
 ---
 title: Python API
-description: Python API reference for ONNX Runtime GenAI
+description: Python API reference for ONNX Runtime generate() API
 has_children: false
 parent: API docs
-grand_parent: Generative AI (Preview)
+grand_parent: Generate API (Preview)
 nav_order: 1
 ---
 
@@ -30,7 +30,7 @@ import onnxruntime_genai
 
 ## Model class
 
-### Load the model
+### Load a model
 
 Loads the ONNX model(s) and configuration from a folder on disk.
 
@@ -41,10 +41,6 @@ onnxruntime_genai.Model(model_folder: str) -> onnxruntime_genai.Model
 #### Parameters
 
 - `model_folder`: Location of model and configuration on disk
-- `device`: The device to run on. One of:
-   - onnxruntime_genai.CPU
-   - onnxruntime_genai.CUDA
-   If not specified, defaults to CPU.
 
 #### Returns
 
@@ -57,28 +53,24 @@ onnxruntime_genai.Model.generate(params: GeneratorParams) -> numpy.ndarray[int, 
 ```
 
 #### Parameters
-- `params`: (Required) Created by the `GenerateParams` method.
+- `params`: (Required) Created by the `GeneratorParams` method.
 
 #### Returns
 
 `numpy.ndarray[int, int]`: a two dimensional numpy array with dimensions equal to the size of the batch passed in and the maximum length of the sequence of tokens.
 
+### Device type
 
-## GeneratorParams class
-
-### Create GeneratorParams object
+Return the device type that the model has been configured to run on.
 
 ```python
-onnxruntime_genai.GeneratorParams(model: onnxruntime_genai.Model) -> onnxruntime_genai.GeneratorParams
+onnxruntime_genai.Model.device_type
 ```
-
-#### Parameters
-
-- `model`: (required) The model that was loaded by onnxruntime_genai.Model()
 
 #### Returns
 
-`onnxruntime_genai.GeneratorParams`: The GeneratorParams object
+`str`: a string describing the device that the loaded model will run on
+
 
 ## Tokenizer class
 
@@ -191,17 +183,42 @@ onnxruntime_genai.TokenizerStream.decode(token: int32) -> str
 
 ## GeneratorParams class
 
-### Create a Generator Params
+### Create a Generator Params object
 
 ```python
 onnxruntime_genai.GeneratorParams(model: Model) -> GeneratorParams
 ```
 
-### Input_ids member 
+### Pad token id member
 
 ```python
-onnxruntime_genai.GeneratorParams.input_ids = numpy.ndarray[numpy.int32, numpy.int32]
+onnxruntime_genai.GeneratorParams.pad_token_id
 ```
+
+### EOS token id member
+
+```python
+onnxruntime_genai.GeneratorParams.eos_token_id
+```
+
+### vocab size member
+
+```python
+onnxruntime_genai.GeneratorParams.vocab_size
+```
+
+### input_ids member
+
+```python
+onnxruntime_genai.GeneratorParams.input_ids: numpy.ndarray[numpy.int32, numpy.int32]
+```
+
+### Set model input
+
+```python
+onnxruntime_genai.GeneratorParams.set_model_input(name: str, value: [])
+```
+
 
 ### Set search options method
 
@@ -209,7 +226,11 @@ onnxruntime_genai.GeneratorParams.input_ids = numpy.ndarray[numpy.int32, numpy.i
 onnxruntime_genai.GeneratorParams.set_search_options(options: dict[str, Any])
 ```
 
-### 
+### Try graph capture with max batch size
+
+```python
+onnxruntime_genai.GeneratorParams.try_graph_capture_with_max_batch_size(max_batch_size: int)
+```
 
 ## Generator class
 
@@ -248,36 +269,35 @@ Runs the model through one iteration.
 onnxruntime_genai.Generator.compute_logits()
 ```
 
+### Get output
+
+Returns an output of the model.
+
+```python
+onnxruntime_genai.Generator.get_output(str: name) -> numpy.ndarray
+```
+
+#### Parameters
+- `name`: the name of the model output
+
+#### Returns
+- `numpy.ndarray`: a multi dimensional array of the model outputs. The shape of the array is shape of the output.
+
+#### Example
+
+The following code returns the output logits of a model.
+
+```python
+logits = generator.get_output("logits")
+```
+
+
 ### Generate next token
 
 Using the current set of logits and the specified generator parameters, calculates the next batch of tokens, using Top P sampling.
 
 ```python
 onnxruntime_genai.Generator.generate_next_token()
-```
-
-### Generate next token with Top P sampling
-
-Using the current set of logits and the specified generator parameters, calculates the next batch of tokens, using Top P sampling.
-
-```python
-onnxruntime_genai.Generator.generate_next_token_top_p()
-```
-
-### Generate next token with Top K sampling
-
-Using the current set of logits and the specified generator parameters, calculates the next batch of tokens, using Top K sampling.
-
-```python
-onnxruntime_genai.Generator.generate_next_token_top_k()
-```
-
-### Generate next token with Top K and Top P sampling
-
-Using the current set of logits and the specified generator parameters, calculates the next batch of tokens, using both Top K then Top P sampling.
-
-```python
-onnxruntime_genai.Generator.generate_next_token_top_k_top_p()
 ```
 
 ### Get next tokens

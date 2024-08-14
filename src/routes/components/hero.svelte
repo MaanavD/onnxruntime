@@ -8,10 +8,22 @@
 	import FaRegClipboard from 'svelte-icons/fa/FaRegClipboard.svelte';
 	import OnnxLight from '../../images/ONNX-Light.svelte';
 	import OnnxDark from '../../images/ONNX-Dark.svelte';
-	import { fade, fly, blur } from 'svelte/transition';
-	import { quintOut } from 'svelte/easing';
+	import { fade } from 'svelte/transition';
+	import { quartInOut } from 'svelte/easing';
 
-	let words = ['Cross-Platform', 'GPU', 'Python', 'CPU', 'Mobile', 'C#', 'Edge', 'JavaScript', 'Java', 'C++', 'Browser'];
+	let words = [
+		'Cross-Platform',
+		'GPU',
+		'Python',
+		'CPU',
+		'Mobile',
+		'C#',
+		'Edge',
+		'JavaScript',
+		'Java',
+		'C++',
+		'Browser'
+	];
 	let activeWord = 'Cross-Platform';
 	let currentWord = 0;
 	let cycleWord = () => {
@@ -41,7 +53,7 @@
 </script>
 
 {#if copied}
-	<div class="toast toast-top top-14 z-50">
+	<div class="toast toast-top top-14 z-50" role="alert">
 		<div class="alert alert-info">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
@@ -65,24 +77,25 @@
 		</div>
 	</div>
 {/if}
-<div class="hero bg-gradient-to-b from-primary">
+<div role="main" class="hero bg-gradient-to-b from-primary">
 	<div class="hero-content md:my-20">
 		<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
 			<div class="col-span-4 self-center md:mr-20">
-				<h1 class="text-5xl">Accelerated
-				{#key activeWord}
-					<span
-						class="text-5xl"
-						in:fly={{ delay: 0, duration: 300, x: 200, y: 0, opacity: 1, easing: quintOut }}
-					>
-						{activeWord}
-					</span>
-				{/key}
-				</h1>
-				<h1 class="text-5xl">Machine Learning</h1>
+				<h1 class="lg:text-5xl text-4xl">
+					Accelerated
+					{#key activeWord}
+						<span
+							class="lg:text-5xl text-4xl"
+							in:fade={{ delay: 0, duration: 1000, easing: quartInOut }}
+						>
+							{activeWord}
+						</span>
+					{/key}
+					<br/>
+					Machine Learning</h1>
 				<p class="py-3">
-					Production-grade AI engine to speed up training and inferencing in your existing technology
-					stack.
+					Production-grade AI engine to speed up training and inferencing in your existing
+					technology stack.
 				</p>
 				<p class="text-xl my-4">In a rush? Get started easily:</p>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -93,8 +106,8 @@
 						<button
 							aria-label="copy python code"
 							on:click={() => copy(pythonCode)}
-							class="col-span-1 btn rounded-none h-full"
-							><span class="w-6 h-6"><FaRegClipboard /></span></button
+							class="col-span-1 btn rounded-none h-full *:hover:scale-125 *:hover:transition *:hover:duration-200"
+							><span class="min-w-6 h-6"><FaRegClipboard /></span></button
 						>
 					</div>
 					<div class="grid grid-cols-6 border-solid border-2 border-secondary">
@@ -104,8 +117,8 @@
 						<button
 							aria-label="copy nuget code"
 							on:click={() => copy(nugetCode)}
-							class="col-span-1 btn rounded-none h-full"
-							><span class="w-6 h-6"><FaRegClipboard /></span></button
+							class="col-span-1 btn rounded-none h-full *:hover:scale-125 *:hover:transition *:hover:duration-200"
+							><span class="min-w-6 h-6"><FaRegClipboard /></span></button
 						>
 					</div>
 				</div>
@@ -113,12 +126,12 @@
 					<a class="underline" href="http://">More interested in training? More info here.</a>
 				</p> -->
 				<p class="text-lg mt-2">
-					<a class="text-blue-500 font-medium" href="./getting-started"
+					<a class="text-blue-700 font-medium" href="./getting-started"
 						>Don't see your favorite platform? See the many others we support →</a
 					>
 				</p>
 			</div>
-			<div class="hidden lg:inline mx-auto">
+			<div class="hidden lg:inline mx-auto hover:rotate-180 transition duration-500">
 				<OnnxLight width={300} height={300} />
 			</div>
 		</div>

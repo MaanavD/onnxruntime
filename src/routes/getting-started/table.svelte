@@ -53,40 +53,55 @@
 	const TrainingScenarios = ['Large Model Training', 'On-Device Training'];
 	const TrainingScenarioIds = ['ot_large_model', 'ot_on_device'];
 	const TrainingPlatforms = ['Linux', 'Windows', 'Mac', 'Android', 'iOS', 'Web browser'];
-	const TrainingPlatformIds = ['ot_linux', 'ot_windows', 'ot_mac', 'ot_android', 'ot_ios', 'ot_web'];
+	const TrainingPlatformIds = [
+		'ot_linux',
+		'ot_windows',
+		'ot_mac',
+		'ot_android',
+		'ot_ios',
+		'ot_web'
+	];
 	const TrainingAPIs = ['Python', 'C', 'C++', 'C#', 'Java', 'Obj-C', 'JavaScript'];
-	const TrainingAPIIds = ['ot_python', 'ot_c', 'ot_cplusplus', 'ot_csharp', 'ot_java', 'ot_objc', 'ot_js'];
+	const TrainingAPIIds = [
+		'ot_python',
+		'ot_c',
+		'ot_cplusplus',
+		'ot_csharp',
+		'ot_java',
+		'ot_objc',
+		'ot_js'
+	];
 	const TrainingVersions = ['CUDA 11.8', 'CUDA 12.2', 'ROCm', 'CPU'];
 	const TrainingVersionIds = ['ot_CUDA118', 'ot_CUDA122', 'ot_ROCm', 'ot_CPU'];
 	const TrainingBuilds = ['Stable', 'Preview (Nightly)'];
 	const TrainingBuildIds = ['ot_stable', 'ot_nightly'];
 	const validCombos = {
 		'windows,C-API,X64,CUDA':
-			"Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a> <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
+			"For CUDA 11.X (default): Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a>. <br/>For CUDA 12.X: Follow instructions <a class='text-blue-500' href='https://onnxruntime.ai/docs/install/#install-onnx-runtime-gpu-cuda-12x-1' target='_blank'>here</a>. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
 
 		'windows,C++,X64,CUDA':
-			"Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a> <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
+			"For CUDA 11.X (default): Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a>. <br/>For CUDA 12.X: Follow instructions <a class='text-blue-500' href='https://onnxruntime.ai/docs/install/#install-onnx-runtime-gpu-cuda-12x-1' target='_blank'>here</a>. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
 
 		'windows,C#,X64,CUDA':
-			"Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a> <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
+			"For CUDA 11.X (default): Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a>. <br/>For CUDA 12.X: Follow instructions <a class='text-blue-500' href='https://onnxruntime.ai/docs/install/#install-onnx-runtime-gpu-cuda-12x-1' target='_blank'>here</a>. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
 
 		'windows,Python,X64,CUDA':
-			"pip install onnxruntime-gpu <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
+			"For CUDA 11.X (default): <br/>pip install onnxruntime-gpu <br/>For CUDA 12.X: <br/>pip install onnxruntime-gpu --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/ <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
 
 		'linux,Python,ARM64,CUDA':
-			"For Jetpack 4.4+, follow installation instructions from <a class='text-blue-500' href='https://elinux.org/Jetson_Zoo#ONNX_Runtime' target='_blank'>here</a>",
+			"For Jetpack 4.4+, follow installation instructions from <a class='text-blue-500' href='https://elinux.org/Jetson_Zoo#ONNX_Runtime' target='_blank'>here</a>. <br/>Note: We do not have CUDA 12.X ARM64 support at this time.",
 
 		'linux,C-API,X64,CUDA':
 			"Download .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a> <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
 
 		'linux,C++,X64,CUDA':
-			"Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a> <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
+			"For CUDA 11.X (default): Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a>. <br/>For CUDA 12.X: Follow instructions <a class='text-blue-500' href='https://onnxruntime.ai/docs/install/#install-onnx-runtime-gpu-cuda-12x-1' target='_blank'>here</a>. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
 
 		'linux,C#,X64,CUDA':
-			"Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a> <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
+			"For CUDA 11.X (default): Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime.Gpu' target='_blank'>Microsoft.ML.OnnxRuntime.Gpu</a>. <br/>For CUDA 12.X: Follow instructions <a class='text-blue-500' href='https://onnxruntime.ai/docs/install/#install-onnx-runtime-gpu-cuda-12x-1' target='_blank'>here</a>. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
 
 		'linux,Python,X64,CUDA':
-			"pip install onnxruntime-gpu <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
+			"For CUDA 11.X (default): <br/>pip install onnxruntime-gpu <br/>For CUDA 12.X: <br/>pip install onnxruntime-gpu --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/ <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
 
 		'linux,C-API,ARM32,DefaultCPU':
 			"Follow build instructions from&nbsp;<a class='text-blue-500' href='https://aka.ms/build-ort-arm' target='_blank'>here</a>",
@@ -146,8 +161,8 @@
 			"Add 'onnxruntime-c' using CocoaPods or download the .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>.",
 
 		'mac,C++,X64,DefaultCPU':
-		"Add 'onnxruntime-c' using CocoaPods or download the .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>.",
-		
+			"Add 'onnxruntime-c' using CocoaPods or download the .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>.",
+
 		'mac,C#,X64,DefaultCPU':
 			"Download .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>",
 
@@ -163,16 +178,18 @@
 		'mac,Python,ARM64,CoreML': 'pip install onnxruntime',
 
 		'mac,objectivec,X64,DefaultCPU': "Add 'onnxruntime-objc' using CocoaPods.",
-		
+
 		'mac,objectivec,ARM64,DefaultCPU': "Add 'onnxruntime-objc' using CocoaPods.",
-		
+
 		'mac,objectivec,X64,CoreML': "Add 'onnxruntime-objc' using CocoaPods.",
-		
+
 		'mac,objectivec,ARM64,CoreML': "Add 'onnxruntime-objc' using CocoaPods.",
 
-		'mac,C-API,X64,CoreML': "Add 'onnxruntime-c' using CocoaPods or download the .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>.",
+		'mac,C-API,X64,CoreML':
+			"Add 'onnxruntime-c' using CocoaPods or download the .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>.",
 
-		'mac,C++,X64,CoreML': "Add 'onnxruntime-c' using CocoaPods or download the .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>.",
+		'mac,C++,X64,CoreML':
+			"Add 'onnxruntime-c' using CocoaPods or download the .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>.",
 
 		'linux,Python,X64,DefaultCPU': 'pip install onnxruntime',
 
@@ -318,7 +335,7 @@
 			"Add a dependency on <a class='text-blue-500' href='https://search.maven.org/artifact/com.microsoft.onnxruntime/onnxruntime' target='_blank'>com.microsoft.onnxruntime:onnxruntime</a> using Maven/Gradle",
 
 		'linux,Java,X64,CUDA':
-			"Add a dependency on <a class='text-blue-500' href='https://search.maven.org/artifact/com.microsoft.onnxruntime/onnxruntime_gpu' target='_blank'>com.microsoft.onnxruntime:onnxruntime_gpu</a> using Maven/Gradle. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
+			"Add a dependency on <a class='text-blue-500' href='https://search.maven.org/artifact/com.microsoft.onnxruntime/onnxruntime_gpu' target='_blank'>com.microsoft.onnxruntime:onnxruntime_gpu</a> using Maven/Gradle. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements. <br/>Note: CUDA 12.X is not currently available with the Java GPU package due to low demand.",
 
 		'mac,Java,X64,DefaultCPU':
 			"Add a dependency on <a class='text-blue-500' href='https://search.maven.org/artifact/com.microsoft.onnxruntime/onnxruntime' target='_blank'>com.microsoft.onnxruntime:onnxruntime</a> using Maven/Gradle",
@@ -365,7 +382,7 @@
 			"Add a dependency on <a class='text-blue-500' href='https://search.maven.org/artifact/com.microsoft.onnxruntime/onnxruntime' target='_blank'>com.microsoft.onnxruntime:onnxruntime</a> using Maven/Gradle",
 
 		'windows,Java,X64,CUDA':
-			"Add a dependency on <a class='text-blue-500' href='https://search.maven.org/artifact/com.microsoft.onnxruntime/onnxruntime_gpu' target='_blank'>com.microsoft.onnxruntime:onnxruntime_gpu</a> using Maven/Gradle. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
+			"Add a dependency on <a class='text-blue-500' href='https://search.maven.org/artifact/com.microsoft.onnxruntime/onnxruntime_gpu' target='_blank'>com.microsoft.onnxruntime:onnxruntime_gpu</a> using Maven/Gradle. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements. <br/>Note: CUDA 12.X is not currently available with the Java GPU package due to low demand.",
 
 		'windows,Java,X64,TensorRT':
 			"Add a dependency on <a class='text-blue-500' href='https://search.maven.org/artifact/com.microsoft.onnxruntime/onnxruntime_gpu' target='_blank'>com.microsoft.onnxruntime:onnxruntime_gpu</a> using Maven/Gradle. <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/TensorRT-ExecutionProvider.html' target='_blank'>docs</a> for usage details.",
@@ -582,7 +599,7 @@
 
 		//mac m1
 		'mac,C-API,ARM64,CoreML':
-		"Add 'onnxruntime-c' using CocoaPods or download the .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>.",
+			"Add 'onnxruntime-c' using CocoaPods or download the .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a>.",
 
 		'mac,C#,ARM64,CoreML':
 			"Install Nuget package&nbsp;<a class='text-blue-500' href='https://www.nuget.org/packages/Microsoft.ML.OnnxRuntime' target='_blank'>Microsoft.ML.OnnxRuntime</a> <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CoreML-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
@@ -704,13 +721,13 @@
 			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT/pypi/simple/ onnxruntime-training<br/>pip install torch-ort<br/>python -m torch_ort.configure',
 
 		'ot_linux,ot_large_model,ot_python,ot_X64,ot_CUDA118,ot_nightly':
-			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training<br/>pip install torch-ort<br/>python -m torch_ort.configure',
+			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install --pre -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training<br/>pip install torch-ort<br/>python -m torch_ort.configure',
 
 		'ot_linux,ot_large_model,ot_python,ot_X64,ot_CUDA122,ot_stable':
 			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/ onnxruntime-training<br/>pip install torch-ort<br/>python -m torch_ort.configure',
 
 		'ot_linux,ot_large_model,ot_python,ot_X64,ot_CUDA122,ot_nightly':
-			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ort-cuda-12-nightly/pypi/simple/ onnxruntime-training<br/>pip install torch-ort<br/>python -m torch_ort.configure',
+			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install --pre -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ort-cuda-12-nightly/pypi/simple/ onnxruntime-training<br/>pip install torch-ort<br/>python -m torch_ort.configure',
 
 		'ot_linux,ot_large_model,ot_python,ot_X64,ot_ROCm,ot_stable':
 			"pip install onnxruntime-training -f https://download.onnxruntime.ai/onnxruntime_stable_<b>&lt;rocm_version*</b>&gt;.html<br/>pip install torch-ort<br/>python -m torch_ort.configure<br/><br/>*<a class='text-blue-500' href='https://download.onnxruntime.ai/' target='blank'>Available versions</a>",
@@ -722,19 +739,19 @@
 			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT/pypi/simple/ onnxruntime-training-cpu',
 
 		'ot_linux,ot_on_device,ot_python,ot_X64,ot_CPU,ot_nightly':
-			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training-cpu',
+			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install --pre -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training-cpu',
 
 		'ot_linux,ot_on_device,ot_python,ot_X64,ot_CUDA118,ot_stable':
 			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT/pypi/simple/ onnxruntime-training',
 
 		'ot_linux,ot_on_device,ot_python,ot_X64,ot_CUDA118,ot_nightly':
-			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training',
+			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install --pre -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training',
 
 		'ot_linux,ot_on_device,ot_python,ot_X64,ot_CUDA122,ot_stable':
 			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/ onnxruntime-training',
 
 		'ot_linux,ot_on_device,ot_python,ot_X64,ot_CUDA122,ot_nightly':
-			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ort-cuda-12-nightly/pypi/simple/ onnxruntime-training',
+			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install --pre -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ort-cuda-12-nightly/pypi/simple/ onnxruntime-training',
 
 		'ot_linux,ot_on_device,ot_cplusplus,ot_X64,ot_CPU,ot_stable':
 			"Download .tgz file from&nbsp;<a class='text-blue-500' href='https://github.com/microsoft/onnxruntime/releases' target='_blank'>Github</a> <br/>Refer to <a class='text-blue-500' href='http://www.onnxruntime.ai/docs/execution-providers/CUDA-ExecutionProvider.html#requirements' target='_blank'>docs</a> for requirements.",
@@ -758,7 +775,7 @@
 			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT/pypi/simple/ onnxruntime-training-cpu',
 
 		'ot_windows,ot_on_device,ot_python,ot_X64,ot_CPU,ot_nightly':
-			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training-cpu',
+			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install --pre -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training-cpu',
 
 		'ot_windows,ot_on_device,ot_python,ot_X64,ot_CUDA118,ot_stable':
 			"Follow build instructions from&nbsp;<a class='text-blue-500' href='https://onnxruntime.ai/docs/build/training.html' target='_blank'>here</a>",
@@ -803,7 +820,7 @@
 			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT/pypi/simple/ onnxruntime-training-cpu',
 
 		'ot_mac,ot_on_device,ot_python,ot_X64,ot_CPU,ot_nightly':
-			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training-cpu',
+			'python -m pip install cerberus flatbuffers h5py numpy>=1.16.6 onnx packaging protobuf sympy setuptools>=41.4.0<br/>pip install --pre -i https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/pypi/simple/ onnxruntime-training-cpu',
 
 		'ot_ios,ot_on_device,ot_objc,ot_X64,ot_CPU,ot_stable':
 			"Add 'onnxruntime-training-objc' using CocoaPods and refer to the <a class='text-blue-500' href='https://onnxruntime.ai/docs/tutorials/mobile/' target='_blank'>mobile deployment guide</a>",
@@ -823,12 +840,9 @@
 		'ot_ios,ot_on_device,ot_cplusplus,ot_X64,ot_CPU,ot_nightly':
 			"Follow build instructions from&nbsp;<a class='text-blue-500' href='https://onnxruntime.ai/docs/build/ios.html' target='_blank'>here</a>",
 
-		'ot_web,ot_on_device,ot_js,ot_X64,ot_CPU,ot_stable':
-			"npm install onnxruntime-web",
+		'ot_web,ot_on_device,ot_js,ot_X64,ot_CPU,ot_stable': 'npm install onnxruntime-web',
 
-		'ot_web,ot_on_device,ot_js,ot_X64,ot_CPU,ot_nightly':
-			"npm install onnxruntime-web@dev",
-
+		'ot_web,ot_on_device,ot_js,ot_X64,ot_CPU,ot_nightly': 'npm install onnxruntime-web@dev'
 	};
 	onMount(() => {
 		var supportedOperatingSystemsNew = [
@@ -1612,45 +1626,6 @@
 			event.currentTarget.className = event.currentTarget.className.replace(' focus', '');
 		}
 
-		jq(document).ready(function () {
-			jq(".tbl_tablist li[role='tab']").click(function () {
-				jq(".tbl_tablist li[role='tab']:not(this)").attr('aria-selected', 'false');
-				jq(this).attr('aria-selected', 'true');
-				var tabpanid = jq(this).attr('aria-controls');
-				var tabpan = jq('#' + tabpanid);
-				jq("div[role='tabpanel']:not(tabpan)").attr('aria-hidden', 'true');
-				jq("div[role='tabpanel']:not(tabpan)").addClass('hidden');
-
-				tabpan.removeClass('hidden');
-				tabpan.attr('aria-hidden', 'false');
-			});
-
-			jq(".tbl_tablist li[role='tab']").keydown(function (ev) {
-				if (ev.which == 13) {
-					jq(this).click();
-				}
-			});
-
-			//This adds keyboard function that pressing an arrow left or arrow right from the tabs toggel the tabs.
-			jq(".tbl_tablist li[role='tab']").keydown(function (ev) {
-				if (ev.which == 39 || ev.which == 37) {
-					var selected = jq(this).attr('aria-selected');
-					if (selected == 'true') {
-						jq("li[aria-selected='false']").attr('aria-selected', 'true').focus();
-						jq(this).attr('aria-selected', 'false');
-
-						var tabpanid = jq("li[aria-selected='true']").attr('aria-controls');
-						var tabpan = jq('#' + tabpanid);
-						jq("div[role='tabpanel']:not(tabpan)").attr('aria-hidden', 'true');
-						jq("div[role='tabpanel']:not(tabpan)").addClass('hidden');
-
-						tabpan.attr('aria-hidden', 'false');
-						tabpan.removeClass('hidden');
-					}
-				}
-			});
-		});
-
 		// Modal Extension
 		// ===============================
 
@@ -1821,7 +1796,7 @@
 		Select the configuration you want to use and run the corresponding installation script.
 	</p>
 	<div>
-		<div class="tabs tabs-bordered ">
+		<div class="tabs tabs-bordered" role="tablist">
 			{#each tabs as tab, index}
 				<li
 					class="nav-item tab tab-lg"
@@ -1830,7 +1805,6 @@
 					on:keypress={() => (activeTab = index)}
 					id={index == 0 ? 'OI_tab' : 'OT_tab'}
 					data-toggle="pill"
-					aria-controls="panel{index}"
 					tabindex={0}
 					role="tab"
 				>

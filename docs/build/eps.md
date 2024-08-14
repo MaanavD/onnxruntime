@@ -45,11 +45,13 @@ The onnxruntime code will look for the provider shared libraries in the same loc
 ### Prerequisites
 {: .no_toc }
 
-* Install [CUDA](https://developer.nvidia.com/cuda-toolkit) and [cuDNN](https://developer.nvidia.com/cudnn) according to the [version compatibility matrix](../execution-providers/CUDA-ExecutionProvider.md#requirements).
-  * The path to the CUDA installation must be provided via the CUDA_HOME environment variable, or the `--cuda_home` parameter.
-  * The path to the cuDNN installation (include the `cuda` folder in the path) must be provided via the CUDNN_HOME environment variable, or `--cudnn_home` parameter. The cuDNN path should contain `bin`, `include` and `lib` directories.
-  * The path to the cuDNN bin directory must be added to the PATH environment variable so that cudnn64_8.dll is found.
-
+* Install [CUDA](https://developer.nvidia.com/cuda-toolkit) and [cuDNN](https://developer.nvidia.com/cudnn)
+   * The CUDA execution provider for ONNX Runtime is built and tested with CUDA 11.8, 12.2 and cuDNN 8.9. Check [here](../execution-providers/CUDA-ExecutionProvider.md#requirements) for more version information.
+   * The path to the CUDA installation must be provided via the CUDA_HOME environment variable, or the `--cuda_home` parameter. The installation directory should contain `bin`, `include` and `lib` sub-directories.
+   * The path to the CUDA `bin` directory must be added to the PATH environment variable so that `nvcc` is found.
+   * The path to the cuDNN installation must be provided via the CUDNN_HOME environment variable, or `--cudnn_home` parameter. In Windows, the installation directory should contain `bin`, `include` and `lib` sub-directories.
+   * cuDNN 8.* requires ZLib. Follow the [cuDNN 8.9 installation guide](https://docs.nvidia.com/deeplearning/cudnn/archives/cudnn-890/install-guide/index.html) to install zlib in Linux or Windows. 
+   * In Windows, the path to the cuDNN bin directory must be added to the PATH environment variable so that cudnn64_8.dll is found.
 
 ### Build Instructions
 {: .no_toc }
@@ -106,14 +108,9 @@ See more information on the TensorRT Execution Provider [here](../execution-prov
 ### Prerequisites
 {: .no_toc }
 
-* Install [CUDA](https://developer.nvidia.com/cuda-toolkit) and [cuDNN](https://developer.nvidia.com/cudnn)
-   * The TensorRT execution provider for ONNX Runtime is built and tested with CUDA 11.8, 12.2 and cuDNN 8.9. Check [here](https://onnxruntime.ai/docs/execution-providers/TensorRT-ExecutionProvider.html#requirements) for more version information.
-   * The path to the CUDA installation must be provided via the CUDA_PATH environment variable, or the `--cuda_home` parameter. The CUDA path should contain `bin`, `include` and `lib` directories.
-   * The path to the CUDA `bin` directory must be added to the PATH environment variable so that `nvcc` is found.
-   * The path to the cuDNN installation (path to cudnn bin/include/lib) must be provided via the cuDNN_PATH environment variable, or `--cudnn_home` parameter.
-     * On Windows, cuDNN requires [zlibwapi.dll](https://docs.nvidia.com/deeplearning/cudnn/installation/windows.html). Feel free to place this dll under `path_to_cudnn/bin`  
+ * Follow [instructions for CUDA execution provider](#cuda) to install CUDA and cuDNN, and setup environment variables.
  * Follow [instructions for installing TensorRT](https://docs.nvidia.com/deeplearning/tensorrt/install-guide/index.html)
-   * The TensorRT execution provider for ONNX Runtime is built and tested with TensorRT 8.6.
+   * The TensorRT execution provider for ONNX Runtime is built and tested with TensorRT 10.0.
    * The path to TensorRT installation must be provided via the `--tensorrt_home` parameter.
    * ONNX Runtime uses TensorRT built-in parser from `tensorrt_home` by default.
    * To use open-sourced [onnx-tensorrt](https://github.com/onnx/onnx-tensorrt/tree/main) parser instead, add `--use_tensorrt_oss_parser` parameter in build commands below.
@@ -149,12 +146,12 @@ Dockerfile instructions are available [here](https://github.com/microsoft/onnxru
 
 ---
 
-## NVIDIA Jetson TX1/TX2/Nano/Xavier
+## NVIDIA Jetson TX1/TX2/Nano/Xavier/Orin
 
 ### Build Instructions
 {: .no_toc }
 
-These instructions are for the latest [JetPack SDK 6.0](https://developer.nvidia.com/embedded/jetpack-sdk-60dp) for Jetson Orin.
+These instructions are for the latest [JetPack SDK 6](https://developer.nvidia.com/embedded/jetpack) for Jetson Orin.
 
 1. Clone the ONNX Runtime repo on the Jetson host
 
@@ -164,11 +161,13 @@ These instructions are for the latest [JetPack SDK 6.0](https://developer.nvidia
 
 2. Specify the CUDA compiler, or add its location to the PATH.
 
-   1. Starting with **CUDA 11.8**, Jetson users on **JetPack 5.0+** can upgrade to the latest CUDA release without updating the JetPack version or Jetson Linux BSP (Board Support Package). CUDA version 11.8 with JetPack 5.1.2 has been tested on Jetson when building ONNX Runtime 1.16. 
+   1. Starting with **CUDA 11.8**, Jetson users on **JetPack 5.0+** can upgrade to the latest CUDA release without updating the JetPack version or Jetson Linux BSP (Board Support Package). 
+    
+      1. For JetPack 5.x users, CUDA 11.8 and GCC 11 are required to be updated, in order to build latest ONNX Runtime locally. 
 
-      1. Check [this official blog](https://developer.nvidia.com/blog/simplifying-cuda-upgrades-for-nvidia-jetson-users/) for CUDA upgrade instruction.
+      2. Check [this official blog](https://developer.nvidia.com/blog/simplifying-cuda-upgrades-for-nvidia-jetson-users/) for CUDA upgrade instruction.
 
-      2. CUDA 12.x is only available to Jetson Orin and newer series (CUDA compute capability >= 8.7). Check [here](https://developer.nvidia.com/cuda-gpus#collapse5) for compute capability datasheet.
+      3. CUDA 12.x is only available to Jetson Orin and newer series (CUDA compute capability >= 8.7). Check [here](https://developer.nvidia.com/cuda-gpus#collapse5) for compute capability datasheet.
          JetPack 6.0 comes preinstalled with CUDA 12.2
 
    2. CMake can't automatically find the correct `nvcc` if it's not in the `PATH`. `nvcc` can be added to `PATH` via:
@@ -182,6 +181,14 @@ These instructions are for the latest [JetPack SDK 6.0](https://developer.nvidia
       ```bash
       export CUDACXX="/usr/local/cuda/bin/nvcc"
       ```
+
+   3. Update TensorRT libraries
+      
+      1. Jetpack 5.x supports up to TensorRT 8.5. Jetpack 6.0 is equipped with TensorRT 8.6 and can support TensorRT 10.
+      
+      2. Jetpack 6.0 users can download latest TensorRT 10 TAR package for jetpack on [TensorRT SDK website](https://developer.nvidia.com/tensorrt/download/10x).
+      
+      3. Check [here](../execution-providers/TensorRT-ExecutionProvider.md#requirements) for TensorRT/CUDA support matrix among all ONNX Runtime versions.
 
 3. Install the ONNX Runtime build dependencies on the Jetpack host:
 
@@ -197,9 +204,9 @@ These instructions are for the latest [JetPack SDK 6.0](https://developer.nvidia
       and follow [https://cmake.org/install/](https://cmake.org/install/) to build from source. 
    2. (Ubuntu) Install deb package via apt repository: e.g [https://apt.kitware.com/](https://apt.kitware.com/)
 
-5. Build the ONNX Runtime Python wheel (update path to CUDA/CUDNN/TensorRT libraries if necessary):
+5. Build the ONNX Runtime Python wheel:
 
-   1. Build `onnxruntime-gpu` wheel with CUDA and TensorRT support:
+   1. Build `onnxruntime-gpu` wheel with CUDA and TensorRT support (update paths to CUDA/CUDNN/TensorRT libraries if necessary):
 
       ```bash
       ./build.sh --config Release --update --build --parallel --build_wheel \
@@ -253,14 +260,13 @@ See more information on the OpenVINO™ Execution Provider [here](../execution-p
 ### Prerequisites
 {: .no_toc }
 
-1. Install the OpenVINO™ offline/online installer from Intel<sup>®</sup> Distribution of OpenVINO™<sup>TM</sup> Toolkit **Release 2023.1** for the appropriate OS and target hardware:
-   * [Windows - CPU, GPU](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/download.html?VERSION=v_2023_1_0&OP_SYSTEM=WINDOWS&DISTRIBUTION=ARCHIVE).
+1. Install the OpenVINO™ offline/online installer from Intel<sup>®</sup> Distribution of OpenVINO™<sup>TM</sup> Toolkit **Release 2024.1** for the appropriate OS and target hardware:
+   * [Windows - CPU, GPU, NPU](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/download.html?VERSION=v_2023_1_0&OP_SYSTEM=WINDOWS&DISTRIBUTION=ARCHIVE).
    * [Linux - CPU, GPU](https://www.intel.com/content/www/us/en/developer/tools/openvino-toolkit/download.html?VERSION=v_2023_1_0&OP_SYSTEM=LINUX&DISTRIBUTION=ARCHIVE)
 
-   Follow [documentation](https://docs.openvino.ai/latest/index.html) for detailed instructions.
+   Follow [documentation](https://docs.openvino.ai/2024/home.html) for detailed instructions.
 
-  *2023.1 is the recommended OpenVINO™ version. [OpenVINO™ 2022.1](https://docs.openvino.ai/archive/2022.1/index.html) is minimal OpenVINO™ version requirement.*
-  *The minimum ubuntu version to support 2023.1 is 18.04.*
+  *2024.1 is the current recommended OpenVINO™ version. [OpenVINO™ 2023.1](https://docs.openvino.ai/archive/2023.1/home.html) is minimal OpenVINO™ version requirement.*
 
 2. Configure the target hardware with specific follow on instructions:
    * To configure Intel<sup>®</sup> Processor Graphics(GPU) please follow these instructions: [Windows](https://docs.openvino.ai/latest/openvino_docs_install_guides_configurations_for_intel_gpu.html#gpu-guide-windows), [Linux](https://docs.openvino.ai/latest/openvino_docs_install_guides_configurations_for_intel_gpu.html#linux)
@@ -294,7 +300,7 @@ See more information on the OpenVINO™ Execution Provider [here](../execution-p
 ./build.sh --config RelWithDebInfo --use_openvino <hardware_option> --build_shared_lib --build_wheel
 ```
 
-* `--build_wheel` Creates python wheel file in dist/ folder. Enable it when building from source and/or while building with CXX11_ABI=1 of OpenVINO.
+* `--build_wheel` Creates python wheel file in dist/ folder. Enable it when building from source.
 * `--use_openvino` builds the OpenVINO™ Execution Provider in ONNX Runtime.
 * `<hardware_option>`: Specifies the default hardware target for building OpenVINO™ Execution Provider. This can be overriden dynamically at runtime with another option (refer to [OpenVINO™-ExecutionProvider](../execution-providers/OpenVINO-ExecutionProvider.md#summary-of-options) for more details on dynamic device selection). Below are the options for different Intel target devices.
 
@@ -302,13 +308,11 @@ Refer to [Intel GPU device naming convention](https://docs.openvino.ai/latest/op
 
 | Hardware Option | Target Device |
 | --------------- | ------------------------|
-| <code>CPU_FP32</code> | Intel<sup>®</sup> CPUs |
-| <code>GPU_FP32</code> | Intel<sup>®</sup> Integrated Graphics |
-| <code>GPU_FP16</code> | Intel<sup>®</sup> Integrated Graphics with FP16 quantization of models |
-| <code>GPU.0_FP32</code> | Intel<sup>®</sup> Integrated Graphics |
-| <code>GPU.0_FP16</code> | Intel<sup>®</sup> Integrated Graphics with FP16 quantization of models |
-| <code>GPU.1_FP32</code> | Intel<sup>®</sup> Discrete Graphics |
-| <code>GPU.1_FP16</code> | Intel<sup>®</sup> Discrete Graphics with FP16 quantization of models |
+| <code>CPU</code> | Intel<sup>®</sup> CPUs |
+| <code>GPU</code> | Intel<sup>®</sup> Integrated Graphics |
+| <code>GPU.0</code> | Intel<sup>®</sup> Integrated Graphics |
+| <code>GPU.1</code> | Intel<sup>®</sup> Discrete Graphics |
+| <code>NPU</code> | Intel<sup>®</sup> Neural Processor Unit |
 | <code>HETERO:DEVICE_TYPE_1,DEVICE_TYPE_2,DEVICE_TYPE_3...</code> | All Intel<sup>®</sup> silicons mentioned above |
 | <code>MULTI:DEVICE_TYPE_1,DEVICE_TYPE_2,DEVICE_TYPE_3...</code> | All Intel<sup>®</sup> silicons mentioned above |
 | <code>AUTO:DEVICE_TYPE_1,DEVICE_TYPE_2,DEVICE_TYPE_3...</code> | All Intel<sup>®</sup> silicons mentioned above |
@@ -316,7 +320,7 @@ Refer to [Intel GPU device naming convention](https://docs.openvino.ai/latest/op
 Specifying Hardware Target for HETERO or Multi or AUTO device Build:
 
 HETERO:DEVICE_TYPE_1,DEVICE_TYPE_2,DEVICE_TYPE_3...
-The DEVICE_TYPE can be any of these devices from this list ['CPU','GPU']
+The DEVICE_TYPE can be any of these devices from this list ['CPU','GPU', 'NPU']
 
 A minimum of two device's should be specified for a valid HETERO or MULTI or AUTO device build.
 

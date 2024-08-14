@@ -10,10 +10,14 @@
 	import LlamaImage from '../../images/blogs/accelerating-llama-2/Figure1-LLaMA-2-7B-E2E-Throughput.png';
 	import SDXLTurboImage from '../../images/blogs/sdxl_blog_thumbnail.png';
 	import Phi2Image from '../../routes/blogs/accelerating-phi-2/Phi2_Int4_TokenGenerationTP.png';
+	import Phi3Image from '../../routes/blogs/accelerating-phi-3/Phi3_Thumbnail.png';
 	import { createEventDispatcher } from 'svelte';
 	import ORT117Thumbnail from '../../images/blogs/ort-1-17-thumbnail.png';
 	import WebGPUImage from '../../images/blogs/webgpu_blog_thumbnail.jpg';
 	import WebTrainingImage from '../../images/blogs/webtraining_blog_thumbnail.png';
+	import Phi3OnDeviceImage from '../../images/blogs/phi-3-on-device_blog_thumbnail.png';
+	import Phi3SmallMediumImage from '../../images/blogs/accelerating-phi-3-medium-thumbnail.png';
+	import LightGlueImage from '../../images/blogs/lightglue-community-blog.png';
 	onMount(() => {
 		anime({
 			targets: '.border-primary',
@@ -42,14 +46,77 @@
 	}
 	let featuredblog = [
 		{
+			title: 'Accelerating LightGlue Inference with ONNX Runtime and TensorRT',
+			date: 'July 17th, 2024',
+			blurb:
+				'Outperform torch.compile significantly using ONNX Runtime with TensorRT for LightGlue inference.',
+			link: 'https://fabio-sim.github.io/blog/accelerating-lightglue-inference-onnx-runtime-tensorrt/',
+			image: LightGlueImage,
+			imgalt:
+				'Speedup for ONNX Runtime with TensorRT and CUDA vs. torch.compile for difference batch sizes and sequence lengths.'
+		},
+		{
+			title: 'High performance on-device real-time ML with NimbleEdge, using ONNX Runtime',
+			date: 'June 17th, 2024',
+			blurb:
+				'Using NimbleEdge with ONNX Runtime delivers millisecond latency and minimal resource use, enabling real-time and privacy-preserving personalization in mobile apps.',
+			link: 'blogs/nimbleedge-x-onnxruntime',
+			image: 'https://iili.io/d95Pwcx.png',
+			imgalt:
+				'Image of the different steps of an ML pipeline on a mobile device, running using NimbleEdge and ONNX Runtime.'
+		},
+		{
+			title: 'Background Removal in the Browser Using ONNX Runtime with WebGPU',
+			date: 'June 12th, 2024',
+			blurb:
+				"Using ONNX Runtime with WebGPU and WebAssembly leads to 20x speedup over multi-threaded and 550x speedup over single-threaded CPU performance. Thus achieving interactive speeds for state-of-the-art background removal directly in the browser.",
+			link: 'https://img.ly/blog/browser-background-removal-using-onnx-runtime-webgpu/',
+			image: 'https://imgly-blog-prod.storage.googleapis.com/2024/06/onnx-runtime-imgly.jpg',
+			imgalt:
+				'Image of a skateboarder with a sky background, with half of the background being alternating grey and white squares indicating it has been removed.'
+		},
+		
+	];
+	let blogs = [
+		{
+			title: 'Phi-3 Small and Medium Models are now Optimized with ONNX Runtime and DirectML',
+			date: 'May 21th, 2024',
+			blurb:
+				"You can now run the Phi-3 medium, small models on device of your choice.",
+			link: 'blogs/accelerating-phi-3-small-medium',
+			image: Phi3SmallMediumImage,
+			imgalt:
+				'Chart comparing model size (in GB) of ONNX Phi-3-medium between PyTorch and ONNX Runtime'
+		},
+		{
+			title: 'Enjoy the Power of Phi-3 with ONNX Runtime on your device',
+			date: 'May 20th, 2024',
+			blurb:
+				"Harness ONNX Runtime to run Phi-3-mini on mobile phones and in the browser.",
+			link: 'https://huggingface.co/blog/Emma-N/enjoy-the-power-of-phi-3-with-onnx-runtime',
+			image: Phi3OnDeviceImage,
+			imgalt:
+				'Chart comparing model size (in GB) of ONNX Phi-3-mini for web and mobile with original Phi-3-mini'
+		},{
+			title: 'ONNX Runtime supports Phi-3 mini models across platforms and devices',
+			date: 'April 22nd, 2024',
+			blurb:
+				"You can now run Microsoft's latest home-grown Phi-3 models across a huge range of devices and platforms thanks to ONNX Runtime and DirectML.",
+			link: 'blogs/accelerating-phi-3',
+			image: Phi3Image,
+			imgalt:
+				'Phi-3 + ONNX Runtime with the prompt "Tell me a joke" and Phi-3 answering: "Why don\'t scientists trust atoms?" "Because they make up everything!"'
+		},
+		{
 			title: 'ONNX Runtime Web unleashes generative AI in the browser using WebGPU',
 			date: 'February 29th, 2024',
 			blurb:
 				'We are thrilled to announce the official launch of ONNX Runtime Web featuring WebGPU, which is now available in the ONNX Runtime 1.17 release.',
 			link: 'https://cloudblogs.microsoft.com/opensource/2024/02/29/onnx-runtime-web-unleashes-generative-ai-in-the-browser-using-webgpu/',
 			image: WebGPUImage,
-			imgalt: 'Comparison of ONNX Runtime Web with WebGPU EP on GPU vs. WASM EP on CPU for segment anything example'
-		},
+			imgalt:
+				'Comparison of ONNX Runtime Web with WebGPU EP on GPU vs. WASM EP on CPU for segment anything example'
+		}, 
 		{
 			title: 'ONNX Runtime 1.17: CUDA 12 support, Phi-2 optimizations, WebGPU, and more!',
 			date: 'February 28th, 2024',
@@ -62,14 +129,11 @@
 		{
 			title: 'Accelerating Phi-2, CodeLlama, Gemma and other Gen AI models with ONNX Runtime',
 			date: 'February 26th, 2024',
-			blurb:
-				'Improvements with ONNX Runtime for inferencing popular Gen AI models.',
+			blurb: 'Improvements with ONNX Runtime for inferencing popular Gen AI models.',
 			link: 'blogs/accelerating-phi-2',
 			image: Phi2Image,
 			imgalt: 'Phi2 float16 token generation throughput comparison'
-		}
-	];
-	let blogs = [
+		},
 		{
 			title: 'On-Device Training: Training a model in browser',
 			date: 'February 6th, 2024',
@@ -303,7 +367,16 @@
 	];
 	let blogsCommunity = [
 		{
-			title: 'Efficient image generation with Stable Diffusion models and ONNX Runtime using AMD GPUs',
+			title:
+				'Deploying a Production-Ready RAG Server: A Comprehensive Guide with LlamaIndex',
+			date: 'March 27, 2024',
+			link: 'https://python.plainenglish.io/deploying-a-production-ready-rag-server-a-comprehensive-guide-with-llamaindex-dbe57cc960df',
+			blurb:
+				'Leveraging ONNX Runtime to use FastEmbed for a serverless deployment of a RAG server with LlamaIndex.'
+		},
+		{
+			title:
+				'Efficient image generation with Stable Diffusion models and ONNX Runtime using AMD GPUs',
 			date: 'February 23, 2024',
 			link: 'https://rocm.blogs.amd.com/artificial-intelligence/stable-diffusion-onnx-runtime/README.html',
 			blurb:
@@ -322,21 +395,35 @@
 			blurb:
 				'During the annual Student Cluster Competition (SCC), UC San Diego undergraduate students achieved third place. Their success was fueled by optimizing performance using industry benchmarks, including the MLPerf Inference Benchmark. The seamless support for PyTorch and ONNX Runtime enabled them to port and fine-tune their code efficiently.',
 			link: 'https://www.hpcwire.com/off-the-wire/uc-san-diego-students-win-mlperf-contest-at-sc23/'
-		},	
+		},
 		{
 			title: 'Human Capital Management (HCM) - Sentence Similarity Language Model using Java',
 			date: 'December 5, 2023',
-			blurb: 'Using ONNX Runtime, the HCM team was able to deploy a sentence similarity language model using Java, demonstrating how easy it is to use with multiple languages.',
+			blurb:
+				'Using ONNX Runtime, the HCM team was able to deploy a sentence similarity language model using Java, demonstrating how easy it is to use with multiple languages.',
 			link: 'https://www.linkedin.com/pulse/hcm-sentence-similarity-language-model-using-java-jonathon-palmieri-tdlpc%3FtrackingId=CN2PPVO4Toqh8r6JsAYMIw%253D%253D/?trackingId=ByNomo0pQFKM%2F%2BWEknVs7Q%3D%3D'
 		}
 	];
+	let description = 'ONNX Runtime Blogs - your source for the latest ONNX Runtime updates and information.'
+	let image = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
+	let imageSquare = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
+	let authors = ['']
+	let keywords = 'onnxruntime, onnx runtime blogs, onnx runtime community blogs, onnx runtime community posts, onnx runtime community announcements'
 </script>
-
 <svelte:head>
-	<meta
-		name="description"
-		content="ONNX Runtime Blogs - your source for staying updated on the latest ONNX Runtime updated and information."
-	/>
+	<!-- Dynamic meta tags -->
+	<meta name="description" content={description} />
+	<meta name="image" content={image} />
+	<meta name="author" content={authors.join(', ')} />
+	<meta name="keywords" content={keywords} />
+	<!-- Open Graph / Facebook -->
+	<meta property="og:description" content={description}/>
+	<meta property="og:image" content={image} />
+	
+	<!-- Twitter -->
+	<meta property="twitter:description" content={description} />
+	<meta property="twitter:image" content={image} />
+	<meta property="twitter:card" content={imageSquare} />
 </svelte:head>
 <div class="container mx-auto">
 	<div class="flex">
@@ -352,6 +439,7 @@
 				<FeaturedBlog
 					title={blog.title}
 					description={blog.blurb}
+					imgalt={blog.imgalt}
 					date={blog.date}
 					link={blog.link}
 					image={blog.image}

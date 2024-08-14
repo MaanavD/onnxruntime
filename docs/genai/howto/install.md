@@ -1,55 +1,98 @@
 ---
 title: Install
-description: Instructions to install ONNX Runtime GenAI on your target platform in your environment
+description: Instructions to install ONNX Runtime generate() API on your target platform in your environment
 has_children: false
 parent: How to
-grand_parent: Generative AI (Preview)
+grand_parent: Generate API (Preview)
 nav_order: 1
 ---
 
-# Install ONNX Runtime GenAI
+# Install ONNX Runtime generate() API
 {: .no_toc }
 
 * TOC placeholder
 {:toc}
 
-## Python package release candidates
+
+## Python package installation
+
+Note: only one of these sets of packages (CPU, DirectML, CUDA) should be installed in your environment.
+
+### CPU
 
 ```bash
 pip install numpy
-pip install onnxruntime-genai --pre --index-url=
-https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-genai/pypi/simple/`
+pip install onnxruntime-genai
 ```
 
-Append `-cuda` for the library that is optimized for CUDA environments
+### DirectML
 
 ```bash
-pip install onnxruntime-genai-cuda --pre --index-url=
-https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-genai/pypi/simple/`
-
+pip install numpy
+pip install onnxruntime-genai-directml
 ```
 
-## Nuget package release candidates
+### CUDA
 
-To install the NuGet release candidates, add a new package source in Visual Studio, go to `Project` -> `Manage NuGet Packages`.
+If you are installing the CUDA variant of onnxruntime-genai, the CUDA toolkit must be installed.
 
-1. Click on the `Settings` cog icon
+The CUDA toolkit can be downloaded from the [CUDA Toolkit Archive](https://developer.nvidia.com/cuda-toolkit-archive).
 
-2. Click the `+` button to add a new package source
+Ensure that the `CUDA_PATH` environment variable is set to the location of your CUDA installation.
 
-   - Change the Name to `onnxruntime-genai`
-   - Change the Source to `https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-genai/nuget/v3/index.json`
+#### CUDA 11
 
-3. Check the `Include prerelease` button
+```bash
+pip install numpy
+pip install onnxruntime-genai-cuda --index-url=https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-genai/pypi/simple/
+```
 
-4. Add the `Microsoft.ML.OnnxRuntimeGenAI` package
+#### CUDA 12
 
-5. Add the `Microsoft.ML.OnnxRuntime` package
+```bash
+pip install numpy
+pip install onnxruntime-genai-cuda --index-url=https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/
+```
 
-To run with CUDA, use the following packages instead:
 
-- `Microsoft.ML.OnnxRuntimeGenAI.Cuda`
-- `Microsoft.ML.OnnxRuntime.Gpu`
+## Nuget package installation
+
+Note: install only one of these packages (CPU, DirectML, CUDA) in your project.
+
+### Pre-requisites
+
+#### ONNX Runtime dependency
+
+ONNX Runtime generate() versions 0.3.0 and earlier came bundled with the core ONNX Runtime binaries. From version 0.4.0 onwards, the packages are separated to allow a more flexible developer experience.
+
+Version 0.4.0-rc1 depends on the ONNX Runtime version 1.19.0 RC. To install 0.4.0-rc1, add the following nuget source *before* installing the ONNX Runtime generate() nuget package.
+
+```
+dotnet nuget add source https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/ORT-Nightly/nuget/v3/index.json --name ORT-Nightly
+```
+
+### CPU
+
+```bash
+dotnet add package Microsoft.ML.OnnxRuntimeGenAI --prerelease
+```
+
+### CUDA 
+
+Note: only CUDA 11 is supported for versions 0.3.0 and earlier, and only CUDA 12 is supported for versions 0.4.0 and later.
+
+```bash
+dotnet add package Microsoft.ML.OnnxRuntimeGenAI.Cuda --prerelease
+```
+
+### DirectML
+
+```bash
+dotnet add package Microsoft.ML.OnnxRuntimeGenAI.DirectML --prerelease
+```
+
+
+
 
 
    

@@ -9,13 +9,25 @@
 		'ONNX Runtime provides a performant solution to inference models from varying source frameworks (PyTorch, Hugging Face, TensorFlow) on different software and hardware stacks. ONNX Runtime Inference takes advantage of hardware accelerators, supports APIs in multiple languages (Python, C++, C#, C, Java, and more), and works on cloud servers, edge and mobile devices, and in web browsers.';
 	const imgsrc = 'onnxruntimelogo';
 	const imgalt = 'ONNX Runtime Logo';
+	let image = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
+	let imageSquare = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
+	let authors = ['']
+	let keywords = 'onnxruntime, onnx runtime inferencing, onnx runtime inferencing models, onnx runtime inferencing deployment, onnx runtime inferencing performance, onnx runtime inferencing time to market, onnx runtime inferencing deploy anywhere, onnx runtime inferencing boost performance, onnx runtime inferencing improve time to market, onnx runtime inferencing production ready, onnx runtime inferencing lower latency, onnx runtime inferencing higher throughput, onnx runtime inferencing get innovations into production faster, onnx runtime inferencing testimonials, onnx runtime inferencing performance enhancements, onnx runtime inferencing production ready, onnx runtime inferencing lower latency, onnx runtime inferencing higher throughput, onnx runtime inferencing get innovations into production faster, onnx runtime inferencing testimonials, onnx runtime inferencing performance enhancements'
 </script>
-
 <svelte:head>
-	<meta
-		name="description"
-		content="Learn about how ONNX Runtime can be used in various Machine Learning Inferencing scenarios."
-	/>
+	<!-- Dynamic meta tags -->
+	<meta name="description" content={description} />
+	<meta name="image" content={image} />
+	<meta name="author" content={authors.join(', ')} />
+	<meta name="keywords" content={keywords} />
+	<!-- Open Graph / Facebook -->
+	<meta property="og:description" content={description}/>
+	<meta property="og:image" content={image} />
+	
+	<!-- Twitter -->
+	<meta property="twitter:description" content={description} />
+	<meta property="twitter:image" content={image} />
+	<meta property="twitter:card" content={imageSquare} />
 </svelte:head>
 
 <div class="container mx-auto px-10 my-10">
@@ -42,7 +54,9 @@
 	<div class="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mx-auto">
 		<div class="card bg-base-300">
 			<div class="card-body items-center text-center">
-				<h2 class="card-title">Improve inference latency, throughput, memory utilization, and binary size</h2>
+				<h2 class="card-title">
+					Improve inference latency, throughput, memory utilization, and binary size
+				</h2>
 			</div>
 		</div>
 		<div class="card bg-base-300">
@@ -62,7 +76,6 @@
 				<h2 class="card-title">Deploy a classic ML Python model in a C#/C++/Java app</h2>
 			</div>
 		</div>
-		
 	</div>
 </div>
 
@@ -73,15 +86,14 @@
 	imgalt=""
 />
 <div class="container mx-auto px-10 my-10">
-	<div class="mx-auto border border-solid border-primary rounded m-4 p-4">
-		<h1 class="text-3xl mb-2">Examples</h1>
+	<div class="mx-auto bg-neutral-200 rounded m-4 p-4">
+		<h1 class="text-3xl mb-2 text-primary-content">Examples</h1>
 		<div class="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
 			<div class="card bg-base-300">
 				<div class="card-body items-center text-center">
 					<h2 class="card-title">Image Classification</h2>
-					This example app uses image classification to continuously classify the objects
-					detected from the device's camera in real-time and displays the most probable inference results
-					on the screen.
+					This example app uses image classification to continuously classify the objects detected from
+					the device's camera in real-time and displays the most probable inference results on the screen.
 					<div class="card-actions mt-auto mb-2 justify-center">
 						<a
 							href="https://github.com/microsoft/onnxruntime-inference-examples/blob/main/mobile/examples/image_classification/android"
@@ -93,7 +105,8 @@
 			<div class="card bg-base-300">
 				<div class="card-body items-center text-center">
 					<h2 class="card-title">Speech Recognition</h2>
-					This example app uses speech recognition to transcribe speech from the audio recorded by the device.
+					This example app uses speech recognition to transcribe speech from the audio recorded by the
+					device.
 					<div class="card-actions mt-auto mb-2 justify-center">
 						<!-- <a
 							href="https://github.com/microsoft/onnxruntime-inference-examples/blob/main/mobile/examples/speech_recognition/android"
@@ -109,9 +122,9 @@
 			<div class="card bg-base-300">
 				<div class="card-body items-center text-center">
 					<h2 class="card-title">Object Detection</h2>
-					This example app uses object detection to continuously detect the objects in the
-					frames seen by the iOS device's back camera and display the detected object's bounding boxes,
-					detected class, and corresponding inference confidence.
+					This example app uses object detection to continuously detect the objects in the frames seen
+					by the iOS device's back camera and display the detected object's bounding boxes, detected
+					class, and corresponding inference confidence.
 					<div class="card-actions mt-auto mb-2 justify-center">
 						<a
 							href="https://github.com/microsoft/onnxruntime-inference-examples/blob/main/mobile/examples/object_detection/android"
@@ -143,8 +156,7 @@
 		</div>
 		<a
 			href="https://github.com/microsoft/onnxruntime-inference-examples/tree/main/mobile"
-			class="text-2xl text-blue-500"
-			>See more examples of ONNX Runtime Mobile on GitHub. →</a
+			class="text-2xl text-blue-700">See more examples of ONNX Runtime Mobile on GitHub. →</a
 		>
 	</div>
 </div>
@@ -155,7 +167,9 @@
 			<br /><br />
 			<p class="text-xl">
 				ONNX Runtime Web allows JavaScript developers to run and deploy machine learning models in
-				browsers, which provides cross-platform portability with a common implementation. This can simplify the distribution experience as it avoids additional libraries and driver installations.
+				browsers, which provides cross-platform portability with a common implementation. This can
+				simplify the distribution experience as it avoids additional libraries and driver
+				installations.
 			</p>
 			<br />
 			<a href="https://www.youtube.com/watch?v=vYzWrT3A7wQ" class="btn btn-primary"
@@ -166,11 +180,12 @@
 			<ImageInference2 />
 		</div>
 	</div>
-	<div class="mx-auto border border-solid border-primary rounded m-4 p-4">
-		<h1 class="text-3xl">Examples</h1>
+	<div class="mx-auto bg-neutral-200 rounded m-4 p-4">
+		<h1 class="text-3xl text-primary-content">Examples</h1>
 		<div class="grid gap-10 grid-cols-1 md:grid-cols-2">
-			<div class="">
-				<p><br/>
+			<div class="text-primary-content">
+				<p>
+					<br />
 					<b>ONNX Runtime Web Demo</b> is an interactive demo portal that showcases live use of ONNX
 					Runtime Web in VueJS. View these examples to experience the power of ONNX Runtime Web.
 				</p>
@@ -235,7 +250,8 @@
 			<div class="card bg-base-200">
 				<div class="card-body items-center text-center">
 					<h2 class="card-title">Natural Language Processing (NLP)</h2>
-					This example demonstrates how to create custom Excel functions to implement BERT NLP models with ONNX Runtime Web to enable deep learning in spreadsheet tasks.
+					This example demonstrates how to create custom Excel functions to implement BERT NLP models
+					with ONNX Runtime Web to enable deep learning in spreadsheet tasks.
 					<div class="card-actions mt-auto mb-2 justify-center">
 						<a
 							href="https://github.com/microsoft/onnxruntime-inference-examples/tree/main/js/ort-whisper"
@@ -257,7 +273,10 @@
 		<div class="col-span-2">
 			<h1 class="text-4xl">On-Device Training</h1>
 			<br /><br />
-			<p class="text-xl">ONNX Runtime on-device training extends the Inference ecosystem to leverage data on the device to train models.</p>
+			<p class="text-xl">
+				ONNX Runtime on-device training extends the Inference ecosystem to leverage data on the
+				device to train models.
+			</p>
 			<br />
 			<a href="./training#on-device-training" class="btn btn-primary"
 				>Learn more about on-device training →</a
