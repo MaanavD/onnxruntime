@@ -88,7 +88,8 @@ If you would like to use [Xcode](https://developer.apple.com/xcode/) to build th
 
 Without this flag, the cmake build generator will be Unix makefile by default.
 
-Today, Mac computers are either Intel-Based or Apple silicon(aka. ARM) based. By default, ONNX Runtime's build script only generate bits for the CPU ARCH that the build machine has. If you want to do cross-compiling: generate ARM binaries on a Intel-Based Mac computer, or generate x86 binaries on a Mac ARM computer, you can set the "CMAKE_OSX_ARCHITECTURES" cmake variable. For example:
+Today, Mac computers are either Intel-Based or Apple silicon-based. By default, ONNX Runtime's build script only generate bits for the CPU ARCH that the build machine has. If you want to do cross-compiling: generate arm64 binaries on a Intel-Based Mac computer, or generate x86 binaries on a Mac
+system with Apple silicon, you can set the "CMAKE_OSX_ARCHITECTURES" cmake variable. For example:
 
 Build for Intel CPUs:
 ```bash
@@ -106,6 +107,61 @@ Build for both:
 The last command will generate a fat-binary for both CPU architectures.
 
 Note: unit tests will be skipped due to the incompatible CPU instruction set when doing cross-compiling.
+
+#### AIX
+In AIX, you can build ONNX Runtime for 64bit using
+
+* IBM Open XL compiler tool chain.
+  Minimum required AIX OS version is 7.2. You need to have 17.1.2 compiler PTF5 (17.1.2.5) version.
+* GNU GCC compiler tool chain.
+  Minimum required AIX OS version is 7.3. GCC version 10.3+ is required.
+
+For IBM Open XL, export below environment settings.
+```bash
+ulimit -m unlimited
+ulimit -d unlimited
+ulimit -n 2000
+ulimit -f unlimited
+export OBJECT_MODE=64
+export BUILD_TYPE="Release"
+export CC="/opt/IBM/openxlC/17.1.2/bin/ibm-clang" 
+export CXX="/opt/IBM/openxlC/17.1.2/bin/ibm-clang++_r"
+export CFLAGS="-pthread -m64 -D_ALL_SOURCE -mcmodel=large -Wno-deprecate-lax-vec-conv-all  -Wno-unused-but-set-variable -Wno-unused-command-line-argument -maltivec -mvsx  -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare"
+export CXXFLAGS="-pthread -m64 -D_ALL_SOURCE -mcmodel=large -Wno-deprecate-lax-vec-conv-all -Wno-unused-but-set-variable -Wno-unused-command-line-argument -maltivec -mvsx  -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare"
+export LDFLAGS="-L$PWD/build/Linux/$BUILD_TYPE/ -lpthread"
+export LIBPATH="$PWD/build/Linux/$BUILD_TYPE/"
+```
+For GCC, export below environment settings.
+```bash
+ulimit -m unlimited
+ulimit -d unlimited
+ulimit -n 2000
+ulimit -f unlimited
+export OBJECT_MODE=64
+export BUILD_TYPE="Release"
+export CC="gcc" 
+export CXX="g++"
+export CFLAGS="-maix64 -pthread -DFLATBUFFERS_LOCALE_INDEPENDENT=0 -maltivec -mvsx   -Wno-unused-function -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -fno-extern-tls-init -Wl,-berok "
+export CXXFLAGS="-maix64 -pthread -DFLATBUFFERS_LOCALE_INDEPENDENT=0 -maltivec -mvsx  -Wno-unused-function -Wno-unused-variable -Wno-unused-parameter -Wno-sign-compare -fno-extern-tls-init -Wl,-berok "
+export LDFLAGS="-L$PWD/build/Linux/$BUILD_TYPE/ -Wl,-bbigtoc -lpython3.9"
+export LIBPATH="$PWD/build/Linux/$BUILD_TYPE"
+```
+To initiate build, run the below command
+```bash
+./build.sh \
+--config $BUILD_TYPE\
+  --build_shared_lib \
+  --skip_submodule_sync \
+  --cmake_extra_defines CMAKE_INSTALL_PREFIX=$PWD/install \
+  --parallel  
+```
+
+* If you want to install the package in a custom directory, then mention the directory location as value of CMAKE_INSTALL_PREFIX.
+* In case of IBM Open XL compiler tool chain, It is possible that in AIX 7.2 some of the runtime libraries like libunwind.a  needed for onnxruntime, will be missing. To fix this, you can install the relevant file-sets.
+* --parallel option in build option.
+  As name suggest, this option is for parallel building and resource intensive option. So, if your system is not having good amount of memory for each CPU core, then this option can be skipped. 
+* --allow_running_as_root  is needed if root user is triggering the build.
+    
 
 #### Notes
 
@@ -131,13 +187,14 @@ Note: unit tests will be skipped due to the incompatible CPU instruction set whe
 ### Architectures
 {: .no_toc }
 
-|           | x86_32       | x86_64       | ARM32v7      | ARM64        | PPC64LE | RISCV64 |
-|-----------|:------------:|:------------:|:------------:|:------------:|:-------:|:-------:|
-|Windows    | YES          | YES          |  YES         | YES          | NO      | NO      |
-|Linux      | YES          | YES          |  YES         | YES          | YES     | YES     |
-|macOS      | NO           | YES          |  NO          | NO           | NO      | NO      |
-|Android      | NO           | NO          |  YES          | YES           | NO      | NO      |
-|iOS      | NO           | NO          |  NO          | YES           | NO      | NO      |
+|           | x86_32       | x86_64       | ARM32v7      | ARM64        | PPC64LE | RISCV64 | PPC64BE |
+|-----------|:------------:|:------------:|:------------:|:------------:|:-------:|:-------:| :------:|
+|Windows    | YES          | YES          |  YES         | YES          | NO      | NO      | NO      |
+|Linux      | YES          | YES          |  YES         | YES          | YES     | YES     | NO      |
+|macOS      | NO           | YES          |  NO          | NO           | NO      | NO      | NO      |
+|Android      | NO           | NO          |  YES          | YES           | NO      | NO      | NO     |
+|iOS      | NO           | NO          |  NO          | YES           | NO      | NO      |  NO     |
+|AIX        | NO           | NO          |  NO          | NO           | NO      | NO      |  YES     |
 
 ### Build Environments(Host)
 {: .no_toc }
@@ -311,21 +368,21 @@ ORT_DEBUG_NODE_IO_DUMP_DATA_TO_FILES=1
     ```
 
 
-### ARM
+### Arm
 
-There are a few options for building ONNX Runtime for ARM. 
+There are a few options for building ONNX Runtime for Arm®-based devices. 
 
-First, you may do it on a real ARM device, or on a x86_64 device with an emulator(like qemu), or on a x86_64 device with a docker container with an emulator(you can run an ARM container on a x86_64 PC). Then the build instructions are essentially the same as the instructions for Linux x86_64. However, it wouldn't work if your the CPU you are targeting is not 64-bit since the build process needs more than 2GB memory.  
+First, you may do it on a real Arm-based device, or on a x86_64 device with an emulator(like qemu), or on a x86_64 device with a docker container with an emulator(you can run an Arm-based container on a x86_64 PC). Then the build instructions are essentially the same as the instructions for Linux x86_64. However, it wouldn't work if your the CPU you are targeting is not 64-bit since the build process needs more than 2GB memory.  
 
-* [Cross compiling for ARM with simulation (Linux/Windows)](#cross-compiling-for-arm-with-simulation-linuxwindows) - **Recommended**;  Easy, slow, ARM64 only(no support for ARM32)
+* [Cross compiling for Arm-based devices with simulation (Linux/Windows)](#cross-compiling-for-arm-based-devices-with-simulation-linuxwindows) - **Recommended**;  Easy, slow, ARM64 only(no support for ARM32)
 * [Cross compiling on Linux](#cross-compiling-on-linux) - Difficult, fast
 * [Cross compiling on Windows](#cross-compiling-on-windows)
 
-#### Cross compiling for ARM with simulation (Linux/Windows)
+#### Cross compiling for Arm-based devices with simulation (Linux/Windows)
 
 *EASY, SLOW, RECOMMENDED*
 
-This method relies on qemu user mode emulation. It allows you to compile using a desktop or cloud VM through instruction level simulation. You'll run the build on x86 CPU and translate every ARM instruction to x86. This is much faster than compiling natively on a low-end ARM device. The resulting ONNX Runtime Python wheel (.whl) file is then deployed to an ARM device where it can be invoked in Python 3 scripts. The build process can take hours, and may run of memory if the target CPU is 32-bit.
+This method relies on qemu user mode emulation. It allows you to compile using a desktop or cloud VM through instruction level simulation. You'll run the build on x86 CPU and translate every Arm architecture instruction to x86. This is potentially much faster than compiling natively on a low-end device. The resulting ONNX Runtime Python wheel (.whl) file is then deployed to an Arm-based device where it can be invoked in Python 3 scripts. The build process can take hours, and may run of memory if the target CPU is 32-bit.
 
 #### Cross compiling on Linux
 
@@ -364,12 +421,12 @@ This option is very fast and allows the package to be built in minutes, but is c
 
     You must also know what kind of flags your target hardware need, which can differ greatly. For example, if you just get the normal ARMv7 compiler and use it for Raspberry Pi V1 directly, it won't work because Raspberry Pi only has ARMv6. Generally every hardware vendor will provide a toolchain; check how that one was built.
 
-    A target env is identifed by:
+    A target env is identified by:
 
     * Arch: x86_32, x86_64, armv6,armv7,arvm7l,aarch64,...
     * OS: bare-metal or linux.
     * Libc: gnu libc/ulibc/musl/...
-    * ABI: ARM has mutilple ABIs like eabi, eabihf...
+    * ABI: Arm has multiple ABIs like eabi, eabihf...
 
     You can get all these information from the previous output, please be sure they are all correct.
    
@@ -528,8 +585,8 @@ This option is very fast and allows the package to be built in minutes, but is c
 
 **Using Visual C++ compilers**
 
-1. Download and install Visual C++ compilers and libraries for ARM(64).
-   If you have Visual Studio installed, please use the Visual Studio Installer (look under the section `Individual components` after choosing to `modify` Visual Studio) to download and install the corresponding ARM(64) compilers and libraries.
+1. Download and install Visual C++ compilers and libraries for Arm(64).
+   If you have Visual Studio installed, please use the Visual Studio Installer (look under the section `Individual components` after choosing to `modify` Visual Studio) to download and install the corresponding Arm(64) compilers and libraries.
 
 2. Use `.\build.bat` and specify `--arm` or `--arm64` as the build option to start building. Preferably use `Developer Command Prompt for VS` or make sure all the installed cross-compilers are findable from the command prompt being used to build using the PATH environmant variable.
 

@@ -202,7 +202,7 @@ ONNX Runtime quantization on GPU only supports S8S8.
 
 On x86-64 machines with AVX2 and AVX512 extensions, ONNX Runtime uses the VPMADDUBSW instruction for U8S8 for performance. This instruction might suffer from saturation issues: it can happen that the output does not fit into a 16-bit integer and has to be clamped (saturated) to fit. Generally, this is not a big issue for the final result. However, if you do encounter a large accuracy drop, it may be caused by saturation. In this case, you can either try [reduce_range](https://github.com/microsoft/onnxruntime/blob/main/onnxruntime/python/tools/quantization/quantize.py) or the U8U8 format which doesn't have saturation issues.
 
-There is no such issue on other CPU architectures (x64 with VNNI and ARM).
+There is no such issue on other CPU architectures (x64 with VNNI and Arm®).
 
 ### List of Supported Quantized Ops
 {: .no_toc}
@@ -231,13 +231,66 @@ ONNX Runtime leverages the TensorRT Execution Provider for quantization on GPU n
 
 We provide two end-to end examples: [Yolo V3](https://github.com/microsoft/onnxruntime-inference-examples/tree/main/quantization/object_detection/trt/yolov3) and [resnet50](https://github.com/microsoft/onnxruntime-inference-examples/tree/main/quantization/image_classification/trt/resnet50).
 
+## Quantize to Int4/UInt4
+
+ONNX Runtime can quantize certain operators in a model to 4 bit integer types. Block-wise weight-only quantizaiton is applied to the operators. The supported op types are:
+- [MatMul](https://github.com/onnx/onnx/blob/main/docs/Operators.md#matmul):
+  - The node is quantized only if the input `B` is constant
+  - support QOperator or QDQ format.
+  - If QOperator is selected, the node is converted to a [MatMulNBits](https://github.com/microsoft/onnxruntime/blob/main/docs/ContribOperators.md#commicrosoftmatmulnbits) node. Weight `B` is blockwise quantized and saved in the new node. [HQQ](https://arxiv.org/pdf/2309.15531.pdf), [GPTQ](https://huggingface.co/docs/transformers/main/en/quantization/gptq) and RTN (default) algorithms are supported.
+  - If QDQ is selected, the MatMul node is replaced by a DequantizeLinear -> MatMul pair. Weight `B` is blockwise quantized and saved in the DequantizeLinear node as an initializer.
+- [Gather](https://github.com/onnx/onnx/blob/main/docs/Operators.md#Gather):
+  - The node is quantized only if the input `data` is constant.
+  - support QOperator
+  - Gather is quantized to a [GatherBlockQuantized](https://github.com/microsoft/onnxruntime/blob/main/docs/ContribOperators.md#commicrosoftgatherblockquantized) node. Input `data` is blockwise quantized and saved in the new node. Only support RTN algorithm.
+
+Since Int4/UInt4 types are introduced in [onnx opset 21](https://github.com/onnx/onnx/releases/tag/v1.16.0), if the model's onnx domain version is < 21, it is force upgraded to opset 21. Please make sure the operators in the model are compatible with onnx opset 21.
+
+To run a model that has GatherBlockQuantized nodes, ONNX Runtime 1.20 is needed.
+
+Code Examples:
+
+```python
+from onnxruntime.quantization import (
+    matmul_4bits_quantizer,
+    quant_utils,
+    quantize
+)
+from pathlib import Path
+
+model_fp32_path="path/to/orignal/model.onnx"
+model_int4_path="path/to/save/quantized/model.onnx"
+
+quant_config = matmul_4bits_quantizer.DefaultWeightOnlyQuantConfig(
+  block_size=128, # 2's exponential and >= 16
+  is_symmetric=True, # if true, quantize to Int4. otherwsie, quantize to uint4.
+  accuracy_level=4, # used by MatMulNbits, see https://github.com/microsoft/onnxruntime/blob/main/docs/ContribOperators.md#attributes-35
+  quant_format=quant_utils.QuantFormat.QOperator, 
+  op_types_to_quantize=("MatMul","Gather"), # specify which op types to quantize
+  quant_axes=(("MatMul", 0), ("Gather", 1),) # specify which axis to quantize for an op type.
+
+model = quant_utils.load_model_with_shape_infer(Path(model_fp32_path))
+quant = matmul_4bits_quantizer.MatMul4BitsQuantizer(
+  model, 
+  nodes_to_exclude=None, # specify a list of nodes to exclude from quantizaiton
+  nodes_to_include=None, # specify a list of nodes to force include from quantization
+  algo_config=quant_config,)
+quant.process()
+quant.model.save_model_to_file(
+  model_int4_path,
+  True) # save data to external file
+
+```
+
+For AWQ and GTPQ quantization usage, please refer to [Gen-AI model builder](https://github.com/microsoft/onnxruntime-genai/tree/main/src/python/py/models#quantized-pytorch-model).
+
 ## FAQ
 ### Why am I not seeing performance improvements?
 {: .no_toc }
 
 The performance improvement depends on your model and hardware. The performance gain from quantization has two aspects: compute and memory. Old hardware has none or few of the instructions needed to perform efficient inference in int8. And quantization has overhead (from quantizing and dequantizing), so it is not rare to get worse performance on old devices.
 
-x86-64 with VNNI, GPU with Tensor Core int8 support and ARM with dot-product instructions can get better performance in general.
+x86-64 with VNNI, GPU with Tensor Core int8 support and Arm®-based processors with dot-product instructions can get better performance in general.
 
 ### Which quantization method should I choose, dynamic or static?
 {: .no_toc}
