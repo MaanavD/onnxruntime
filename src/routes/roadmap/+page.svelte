@@ -1,3 +1,18 @@
+<script>
+	let description = 'ONNX Runtime Release Roadmap - find the latest release information for ONNX Runtime.';
+	let keywords = 'onnx runtime, onnx runtime roadmap, onnx runtime release, onnx runtime 1.20, onnx runtime 1.21, onnx runtime 1.20.1';
+</script>
+<svelte:head>
+	<!-- Dynamic meta tags -->
+	<meta name="description" content={description} />
+	<meta name="keywords" content={keywords} />
+	<!-- Open Graph / Facebook -->
+	<meta property="og:description" content={description}/>
+	
+	<!-- Twitter -->
+	<meta property="twitter:description" content={description} />
+</svelte:head>
+
 <div class="container mx-auto px-8">
 	<h1 class="text-3xl">ONNX Runtime Release Roadmap</h1>
 	<p>
@@ -22,8 +37,8 @@
 					>
 				</div>
 				<div class="stat-title">Previous release</div>
-				<div class="stat-value text-success">1.19.2</div>
-				<div class="stat-desc">Release date: 9/4/2024</div>
+				<div class="stat-value text-success">1.20.0</div>
+				<div class="stat-desc">Release date: 11/1/2024</div>
 			</div>
 
 			<div class="stat">
@@ -44,8 +59,8 @@
 					>
 				</div>
 				<div class="font-bold underline">In-Progress Release</div>
-				<div class="stat-value text-warning">1.20</div>
-				<div class="stat-desc">Release date: 10/30/2024</div>
+				<div class="stat-value text-warning">1.20.1</div>
+				<div class="stat-desc">Release date: 11/20/2024</div>
 			</div>
 
 			<div class="stat">
@@ -72,50 +87,38 @@
 			</div>
 		</div>
 	</div>
+
 	<h2 class="text-xl font-bold mt-2">Announcements</h2>
 	<ul class="list-disc ml-8">
-		<li><strong>All ONNX Runtime Training packages have been deprecated.</strong> ORT 1.19.2 was the last
-		release for which onnxruntime-training (PyPI), onnxruntime-training-cpu (PyPI), Microsoft.ML.OnnxRuntime.Training
-		(Nuget), onnxruntime-training-c (CocoaPods), onnxruntime-training-objc (CocoaPods), and onnxruntime-training-android
-		(Maven Central) were published.</li>
-		<li><strong>ONNX Runtime packages will stop supporting Python 3.8 and Python 3.9.</strong> This decision aligns with 
-		NumPy Python version support. To continue using ORT with Python 3.8 and Python 3.9, you can use ORT 1.19.2 and earlier.</li>
-	</ul>
-	<h2 class="text-xl font-bold mt-2">New Packages</h2>
-	<p class="font-thin">We are planning to start releasing the following packages:</p>
-	<ul class="list-disc ml-8">
-		<li>Maven package with Android support for QNN EP</li>
-		<li>CocoaPods package with Mac / iOS support for ORT GenAI</li>
+		<li><strong>The onnxruntime-gpu v1.10.0 will be removed from PyPI.</strong> We have hit our PyPI project size limit for onnxruntime-gpu,
+		so we will be removing our oldest package version to free up the necessary space.</li>
+		<li><strong>ONNX Runtime v1.20.0 is now officially released.</strong> For release notes, assets, and more, visit our <a
+			href="https://github.com/microsoft/onnxruntime/releases/tag/v1.20.0"
+			class="text-blue-600 underline">GitHub Releases page</a
+		>.</li>
 	</ul>
 
 	<h2 class="text-xl font-bold mt-2">Versioning Updates</h2>
 	<p class="font-thin">
 		We are planning to upgrade ONNX Runtime support for the following (where the first value is the
 		highest version previously supported and the second value is the version support that will be
-		added in ORT 1.20):
+		added in ORT 1.20.1):
 	</p>
 	<ul class="list-disc ml-8">
-		<li>ONNX 1.16.1 --> 1.17.0</li>
-		<li>TensorRT 10.2 --> 10.4</li>
-		<li>DirectML 1.15.1 --> 1.15.2</li>
+		<li>QNN SDK 2.27 --> 2.28</li>
+		<li>DirectML 1.15.2 --> 1.16</li>
+		<li>ONNX 1.17 support will be included in a future release.</li>
 	</ul>
 
 	<h2 class="text-xl font-bold mt-2">Major Updates</h2>
 	<p class="font-thin">
-		In addition to various bug fixes and performance improvements, ORT 1.20 will include the
-		following major updates:
+		In addition to various bug fixes and performance improvements, ORT 1.20.1 will include the
+		following updates:
 	</p>
 	<ul class="list-disc ml-8">
-		<li>Add MultiLoRA support.</li>
-		<li>Improve CPU FP16 and INT4 performance.</li>
-		<li>
-			Increase GenAI API model support, including Whisper, Phi-3.5-vision multi-frame, and more.
-		</li>
-		<li>Publish Phi-3.5 ONNX model variants to Hugging Face.</li>
-		<li>
-			Expand mobile support to include GPU EP and FP16 support for CoreML EP and XNNPACK kernels.
-		</li>
-		<li>Add Apple support for AI Toolkit for VS Code.</li>
+		<li>CPU FP16 implementation fixes for the following kernels: LayerNormalization, SimplifiedLayerNormalization, SkipLayerNormalization, SkipSimplifiedLayerNormalization.</li>
+		<li>Python quantization tool updates.</li>
+		<li>New QNN SDK version support.</li>
 	</ul>
 
 	<h2 class="text-xl font-bold mt-2">Feature Requests</h2>
@@ -147,9 +150,9 @@
 		<em>Note: All timelines and features listed on this page are subject to change.</em>
 	</p>
 	<div class="divider"></div>
-	<h2 class="text-xl font-bold mt-2">ONNX Runtime 1.20</h2>
+	<h2 class="text-xl font-bold mt-2">ONNX Runtime 1.20.1</h2>
 	<p class="font-thin">
-		<strong>Tentative release date:</strong> 10/30/2024
+		<strong>Tentative release date:</strong> 11/20/2024
 	</p>
 
 	<div class="join join-vertical w-full p-2">
@@ -158,14 +161,11 @@
 			<input type="checkbox" name="announcements" />
 			<div class="collapse-title text-xl font-bold">Announcements</div>
 			<div class="collapse-content">
-				<p class="font-thin">
-					<strong>All ONNX Runtime Training packages have been deprecated.</strong> ORT 1.19.2 was the
-					last release for which onnxruntime-training (PyPI), onnxruntime-training-cpu (PyPI), Microsoft.ML.OnnxRuntime.Training
-					(Nuget), onnxruntime-training-c (CocoaPods), onnxruntime-training-objc (CocoaPods), and onnxruntime-training-android
-					(Maven Central) were published. ONNX Runtime packages will stop supporting Python 3.8 and Python
-					3.9. This decision aligns with NumPy Python version support. To continue using ORT with Python
-					3.8 and Python 3.9, you can use ORT 1.19.2 and earlier.
-				</p>
+				<ul class="list-disc ml-8">
+					<li><strong>The onnxruntime-gpu v1.10.0 will be removed from PyPI.</strong> We have hit our PyPI project size limit for onnxruntime-gpu,
+						so we will be removing our oldest package version to free up the necessary space.
+					</li>
+				</ul>
 			</div>
 		</div>
 
@@ -174,14 +174,9 @@
 			<input type="checkbox" name="build" />
 			<div class="collapse-title text-xl font-bold">Build System & Packages</div>
 			<div class="collapse-content">
-				<ul class="list-disc ml-8">
-					<li>Upgrade ONNX support from 1.16.1 to 1.17.0.</li>
-					<li>Add Python 3.12 support for Windows ARM64.</li>
-					<li>Add vcpkg support.</li>
-					<li>
-						Digitally sign DLLs in Maven build.
-					</li>
-				</ul>
+				<p class="font-thin">
+					No features planned for 1.20.1. Stay tuned for 1.21 features.
+				</p>
 			</div>
 		</div>
 
@@ -190,14 +185,9 @@
 			<input type="checkbox" name="core" />
 			<div class="collapse-title text-xl font-bold">Core</div>
 			<div class="collapse-content">
-				<ul class="list-disc ml-8">
-					<li>Add MultiLoRA support.</li>
-					<li>
-						Improve ThreadPool to spend less time busy waiting.
-					</li>
-					<li>Improve memory utilization, particularly related to external weights.</li>
-					<li>Improve partitioning.</li>
-				</ul>
+				<p class="font-thin">
+					No features planned for 1.20.1. Stay tuned for 1.21 features.
+				</p>
 			</div>
 		</div>
 
@@ -206,9 +196,34 @@
 			<input type="checkbox" name="performance" />
 			<div class="collapse-title text-xl font-bold">Performance</div>
 			<div class="collapse-content">
+				<p class="font-thin">
+					No features planned for 1.20.1. Stay tuned for 1.21 features.
+				</p>
+			</div>
+		</div>
+
+		<!-- Quantization Section -->
+		<div class="collapse collapse-arrow join-item border-base-300 border">
+			<input type="checkbox" name="quantization" />
+			<div class="collapse-title text-xl font-bold">Quantization</div>
+			<div class="collapse-content">
 				<ul class="list-disc ml-8">
-					<li>Add FP16 SLM model support on CPU.</li>
-					<li>Add INT4 quantized embedding support on CPU and CUDA.</li>
+					<li>Introduce get_int_qdq_config() helper to get QDQ configurations (<a
+						href="https://github.com/microsoft/onnxruntime/pull/22677"
+						class="text-blue-600 underline">#22677</a
+					>).</li>
+					<li>Update QDQ Pad, Slice, Softmax (<a
+						href="https://github.com/microsoft/onnxruntime/pull/22676"
+						class="text-blue-600 underline">#22676</a
+					>).</li>
+					<li>Handle input models with pre-quantized weights (<a
+						href="https://github.com/microsoft/onnxruntime/pull/22633"
+						class="text-blue-600 underline">#22633</a
+					>).</li>
+					<li>Prevent int32 quantized bias from clipping by adjusting the weight's scale (<a
+						href="https://github.com/microsoft/onnxruntime/pull/22020"
+						class="text-blue-600 underline">#22020</a
+					>).</li>
 				</ul>
 			</div>
 		</div>
@@ -218,25 +233,17 @@
 			<input type="checkbox" name="eps" />
 			<div class="collapse-title text-xl font-bold">EPs</div>
 			<div class="collapse-content">
-				<h3 class="text-lg font-semibold">TensorRT</h3>
+				<h3 class="text-lg font-semibold">CPU</h3>
 				<ul class="list-disc ml-8">
-					<li>Upgrade TensorRT support from 10.2 to 10.4.</li>
-					<li>Enable DDS, including performance fixes for NMS.</li>
+					<li>Fix CPU FP16 implementations for the following kernels: LayerNormalization, SimplifiedLayerNormalization, SkipLayerNormalization, SkipSimplifiedLayerNormalization.</li>
 				</ul>
 				<h3 class="text-lg font-semibold">QNN</h3>
 				<ul class="list-disc ml-8">
-					<li>Add HTP shared weights context binary.</li>
-					<li>Add runtime support for HTP shared weights in multiple ORT sessions.</li>
-					<li>Add efficient mode support.</li>
-				</ul>
-				<h3 class="text-lg font-semibold">OpenVINO</h3>
-				<ul class="list-disc ml-8">
-					<li>Add context generation memory optimizations.</li>
-					<li>Add efficient mode support.</li>
+					<li>QNN SDK 2.28.x support.</li>
 				</ul>
 				<h3 class="text-lg font-semibold">DirectML</h3>
 				<ul class="list-disc ml-8">
-					<li>Upgrade DirectML support from 1.15.1 to 1.15.2.</li>
+					<li>DirectML 1.16 support.</li>
 				</ul>
 			</div>
 		</div>
@@ -246,14 +253,9 @@
 			<input type="checkbox" name="mobile" />
 			<div class="collapse-title text-xl font-bold">Mobile</div>
 			<div class="collapse-content">
-				<ul class="list-disc ml-8">
-					<li>
-						Add Android QNN support, including a pre-build package, performance improvements, and
-						Phi-3 model support.
-					</li>
-					<li>Add GPU EP support for ORT Mobile.</li>
-					<li>Add FP16 support for CoreML EP and XNNPACK kernels.</li>
-				</ul>
+				<p class="font-thin">
+					No features planned for 1.20.1. Stay tuned for 1.21 features.
+				</p>
 			</div>
 		</div>
 
@@ -262,36 +264,20 @@
 			<input type="checkbox" name="web" />
 			<div class="collapse-title text-xl font-bold">Web</div>
 			<div class="collapse-content">
-				<ul class="list-disc ml-8">
-					<li>Add quantized embedding support.</li>
-					<li>
-						Add on-demand weight loading support, which offloads wasm32 heap and enables
-						8B-parameter LLM models.
-					</li>
-					<li>
-						Add support for wasm64 through a custom build (will not be included in released
-						packages).
-					</li>
-					<li>Add GQA support.</li>
-					<li>Improve performance for integrated Intel GPU.</li>
-					<li>Add support for Opset 21, including Reshape, Shape, and Gelu.</li>
-				</ul>
+				<p class="font-thin">
+					No features planned for 1.20.1. Stay tuned for 1.21 features.
+				</p>
 			</div>
 		</div>
 
-		<!-- GenAI Section -->
+		<!-- generate() API Section -->
 		<div class="collapse collapse-arrow join-item border-base-300 border">
-			<input type="checkbox" name="genai" />
-			<div class="collapse-title text-xl font-bold">GenAI</div>
+			<input type="checkbox" name="generate" />
+			<div class="collapse-title text-xl font-bold">generate() API</div>
 			<div class="collapse-content">
-				<ul class="list-disc ml-8">
-					<li>Add continuous decoding support, including chat mode and system prompt caching.</li>
-					<li>Introduce MultiLoRA API.</li>
-					<li>Add Whisper model support.</li>
-					<li>Add Phi-3.5-vision multi-frame model support.</li>
-					<li>Add Phi-3.5 and Llama-3.1 model support on Qualcomm NPU.</li>
-					<li>Introduce packages for Mac/iOS.</li>
-				</ul>
+				<p class="font-thin">
+					No features planned for 1.20.1. Stay tuned for 1.21 features.
+				</p>
 			</div>
 		</div>
 
@@ -300,12 +286,20 @@
 			<input type="checkbox" name="extensions" />
 			<div class="collapse-title text-xl font-bold">Extensions</div>
 			<div class="collapse-content">
-				<ul class="list-disc ml-8">
-					<li>Improve performance profiling and optimize tokenization.</li>
-					<li>Increase multi-modal model support, including more kernel attributes.</li>
-					<li>Add Unigram tokenization model support.</li>
-					<li>Remove OpenCV dependency from C API build.</li>
-				</ul>
+				<p class="font-thin">
+					No features planned for 1.20.1. Stay tuned for 1.21 features.
+				</p>
+			</div>
+		</div>
+
+		<!-- Olive Section -->
+		<div class="collapse collapse-arrow join-item border-base-300 border">
+			<input type="checkbox" name="olive" />
+			<div class="collapse-title text-xl font-bold">Olive</div>
+			<div class="collapse-content">
+				<p class="font-thin">
+					No features planned for 1.20.1. Stay tuned for 1.21 features.
+				</p>
 			</div>
 		</div>
 	</div>

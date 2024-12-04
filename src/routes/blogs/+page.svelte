@@ -18,6 +18,12 @@
 	import Phi3OnDeviceImage from '../../images/blogs/phi-3-on-device_blog_thumbnail.png';
 	import Phi3SmallMediumImage from '../../images/blogs/accelerating-phi-3-medium-thumbnail.png';
 	import LightGlueImage from '../../images/blogs/lightglue-community-blog.png';
+	import OliveSharedCache from '../../images/blogs/olive-shared-cache-user-flow.png';
+	import GoodnotesThumbnail from '../../images/blogs/goodnotes-scribble-to-erase/Thumbnail.png';
+	import OliveCli from '../../images/blogs/olive-flow.png';
+	import QuantizeFinetune from '../../images/blogs/Quantize-finetune.jpg';
+	import MultiLoraThumbnail from '../../images/blogs/multilora.png';
+	import ORTLogo from '../../images/ONNX-Icon.svg';
 	onMount(() => {
 		anime({
 			targets: '.border-primary',
@@ -46,6 +52,67 @@
 	}
 	let featuredblog = [
 		{
+			title:
+				'Cross-Platform Edge AI Made Easy with ONNX Runtime',
+			date: '19th November, 2024',
+			blurb:
+				"Driven by the growing demand for user privacy, real-time performance, and cost efficiency, edge AI is transforming the AI landscape. At Ignite, we're excited to announce four new features in the ONNX Runtime ecosystem designed to make edge AI more accessible.",
+			link: 'https://techcommunity.microsoft.com/blog/aiplatformblog/cross-platform-edge-ai-made-easy-with-onnx-runtime/4303521',
+			image: ORTLogo,
+			imgalt: 'ONNX Runtime Logo'
+		},	
+		{
+			title:
+				'Announcing MultiLoRA with ONNX Runtime: Revolutionizing AI Customization',
+			date: '20th November, 2024',
+			blurb:
+				'MultiLoRA with ONNX Runtime brings flexible, efficient AI customization by enabling easy integration of LoRA adapters for dynamic, personalized models with minimal resource demands.',
+			link: 'blogs/multilora',
+			image: MultiLoraThumbnail,
+			imgalt: 'Serving LoRA models separately vs with MultiLoRA'
+		},
+		{
+			title:
+				'Is it better to quantize before or after finetuning?',
+			date: '19th November, 2024',
+			blurb:
+				'Learn how to quickly and easily experiment in your model optimization workflow using Olive.',
+			link: 'blogs/olive-quant-ft',
+			image: QuantizeFinetune,
+			imgalt: 'Quantize or finetune first for better model performance?'
+		},
+	];
+	let blogs = [
+		{
+			title:
+				'Scribble to Erase on Goodnotes for Windows, Web, and Android, Powered by ONNX Runtime',
+			date: '18th November, 2024',
+			blurb:
+				'Discover how Goodnotes brings the popular scribble-to-erase feature from iPad to Windows, Web, and Android with the help of ONNX Runtime, enabling seamless, high-performance AI integration across platforms.',
+			link: 'blogs/goodnotes-scribble-to-erase',
+			image: GoodnotesThumbnail,
+			imgalt: 'Scribble to Erase feature on Goodnotes for Windows, Web, and Android'
+		},
+		{
+			title: 'Democratizing AI Model optimization with the new Olive CLI',
+			date: 'November 11th, 2024',
+			blurb:
+				'Learn how to use the new Olive CLI to easily optimize AI Models for on-device inference',
+			link: 'blogs/olive-cli',
+			image: OliveCli,
+			imgalt: 'Olive Flow'
+		},
+		{
+			title:
+				'Enhancing team collaboration during AI model optimization with the Olive Shared Cache',
+			date: 'October 30th, 2024',
+			blurb:
+				"Learn how to use Olive's shared cache to enhance team collaboration when optimizing AI models",
+			link: 'blogs/olive-shared-cache',
+			image: OliveSharedCache,
+			imgalt: 'Team Flow for Olive shared cache'
+		},
+		{
 			title: 'Accelerating LightGlue Inference with ONNX Runtime and TensorRT',
 			date: 'July 17th, 2024',
 			blurb:
@@ -69,20 +136,16 @@
 			title: 'Background Removal in the Browser Using ONNX Runtime with WebGPU',
 			date: 'June 12th, 2024',
 			blurb:
-				"Using ONNX Runtime with WebGPU and WebAssembly leads to 20x speedup over multi-threaded and 550x speedup over single-threaded CPU performance. Thus achieving interactive speeds for state-of-the-art background removal directly in the browser.",
+				'Using ONNX Runtime with WebGPU and WebAssembly leads to 20x speedup over multi-threaded and 550x speedup over single-threaded CPU performance. Thus achieving interactive speeds for state-of-the-art background removal directly in the browser.',
 			link: 'https://img.ly/blog/browser-background-removal-using-onnx-runtime-webgpu/',
 			image: 'https://imgly-blog-prod.storage.googleapis.com/2024/06/onnx-runtime-imgly.jpg',
 			imgalt:
 				'Image of a skateboarder with a sky background, with half of the background being alternating grey and white squares indicating it has been removed.'
 		},
-		
-	];
-	let blogs = [
 		{
 			title: 'Phi-3 Small and Medium Models are now Optimized with ONNX Runtime and DirectML',
 			date: 'May 21th, 2024',
-			blurb:
-				"You can now run the Phi-3 medium, small models on device of your choice.",
+			blurb: 'You can now run the Phi-3 medium, small models on device of your choice.',
 			link: 'blogs/accelerating-phi-3-small-medium',
 			image: Phi3SmallMediumImage,
 			imgalt:
@@ -91,13 +154,13 @@
 		{
 			title: 'Enjoy the Power of Phi-3 with ONNX Runtime on your device',
 			date: 'May 20th, 2024',
-			blurb:
-				"Harness ONNX Runtime to run Phi-3-mini on mobile phones and in the browser.",
+			blurb: 'Harness ONNX Runtime to run Phi-3-mini on mobile phones and in the browser.',
 			link: 'https://huggingface.co/blog/Emma-N/enjoy-the-power-of-phi-3-with-onnx-runtime',
 			image: Phi3OnDeviceImage,
 			imgalt:
 				'Chart comparing model size (in GB) of ONNX Phi-3-mini for web and mobile with original Phi-3-mini'
-		},{
+		},
+		{
 			title: 'ONNX Runtime supports Phi-3 mini models across platforms and devices',
 			date: 'April 22nd, 2024',
 			blurb:
@@ -116,7 +179,7 @@
 			image: WebGPUImage,
 			imgalt:
 				'Comparison of ONNX Runtime Web with WebGPU EP on GPU vs. WASM EP on CPU for segment anything example'
-		}, 
+		},
 		{
 			title: 'ONNX Runtime 1.17: CUDA 12 support, Phi-2 optimizations, WebGPU, and more!',
 			date: 'February 28th, 2024',
@@ -367,14 +430,21 @@
 	];
 	let blogsCommunity = [
 		{
-			title:'Running Phi-3 Mistral 7B LLMs on Raspberry Pi 5: A Step-by-Step Guide',
-			date: 'September 5, 2024',
-			link: 'https://medium.com/@vadikus/running-phi-3-mistral-7b-llms-on-raspberry-pi-5-a-step-by-step-guide-185e8102e35b',
-			blurb: 'Learn how to run Phi-3 Mistral 7B on Raspberry Pi 5 using the ONNX Runtime Gen AI library.'
+			title: 'Sentence Transformers 3.2.0: 2x-3x Faster Inference with ONNX Runtime',
+			date: 'October 10, 2024',
+			link: 'https://github.com/UKPLab/sentence-transformers/releases/tag/v3.2.0',
+			blurb:
+				'This update brings 2x-3x speedups with a new ONNX backends, plus static embeddings offering 50x-500x faster performance with a slight accuracy trade-off. Install with pip install sentence-transformers==3.2.0.'
 		},
 		{
-			title:
-				'Deploying a Production-Ready RAG Server: A Comprehensive Guide with LlamaIndex',
+			title: 'Running Phi-3 Mistral 7B LLMs on Raspberry Pi 5: A Step-by-Step Guide',
+			date: 'September 5, 2024',
+			link: 'https://medium.com/@vadikus/running-phi-3-mistral-7b-llms-on-raspberry-pi-5-a-step-by-step-guide-185e8102e35b',
+			blurb:
+				'Learn how to run Phi-3 Mistral 7B on Raspberry Pi 5 using the ONNX Runtime Gen AI library.'
+		},
+		{
+			title: 'Deploying a Production-Ready RAG Server: A Comprehensive Guide with LlamaIndex',
 			date: 'March 27, 2024',
 			link: 'https://python.plainenglish.io/deploying-a-production-ready-rag-server-a-comprehensive-guide-with-llamaindex-dbe57cc960df',
 			blurb:
@@ -410,12 +480,15 @@
 			link: 'https://www.linkedin.com/pulse/hcm-sentence-similarity-language-model-using-java-jonathon-palmieri-tdlpc%3FtrackingId=CN2PPVO4Toqh8r6JsAYMIw%253D%253D/?trackingId=ByNomo0pQFKM%2F%2BWEknVs7Q%3D%3D'
 		}
 	];
-	let description = 'ONNX Runtime Blogs - your source for the latest ONNX Runtime updates and information.'
-	let image = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
-	let imageSquare = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png'
-	let authors = ['']
-	let keywords = 'onnxruntime, onnx runtime blogs, onnx runtime community blogs, onnx runtime community posts, onnx runtime community announcements'
+	let description =
+		'ONNX Runtime Blogs - your source for the latest ONNX Runtime updates and information.';
+	let image = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png';
+	let imageSquare = 'https://i.ibb.co/0YBy62j/ORT-icon-for-light-bg.png';
+	let authors = [''];
+	let keywords =
+		'onnxruntime, onnx runtime blogs, onnx runtime community blogs, onnx runtime community posts, onnx runtime community announcements';
 </script>
+
 <svelte:head>
 	<!-- Dynamic meta tags -->
 	<meta name="description" content={description} />
@@ -423,9 +496,9 @@
 	<meta name="author" content={authors.join(', ')} />
 	<meta name="keywords" content={keywords} />
 	<!-- Open Graph / Facebook -->
-	<meta property="og:description" content={description}/>
+	<meta property="og:description" content={description} />
 	<meta property="og:image" content={image} />
-	
+
 	<!-- Twitter -->
 	<meta property="twitter:description" content={description} />
 	<meta property="twitter:image" content={image} />
