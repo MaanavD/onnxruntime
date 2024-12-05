@@ -22,7 +22,7 @@ permissions:
 jobs:
   build:
     name: Generate C/C++ API docs
-    runs-on: ["self-hosted"]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Install doxygen and dependencies
