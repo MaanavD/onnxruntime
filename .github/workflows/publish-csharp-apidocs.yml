@@ -21,17 +21,18 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      DOCFXVERSION: 2.62.2
     steps:
     - uses: actions/checkout@v4
-    - name: Install Mono
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y mono-complete
     - name: Install DocFX
       run: |
         dotnet tool update -g docfx
-        echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
-    # Restore project dependencies
+    - name: Update PATH
+      run: |
+        Add-Content -Value "$env:USERPROFILE\.dotnet\tools" -Encoding utf8 -Path $env:GITHUB_PATH
+    # NOTE: We need to restore Microsoft.ML.OnnxRuntime.csproj manually to set IncludeMobileTargets=false
+    # docfx doesn't seem to be able to do that properly resulting in build errors
     - name: Restore dependencies
       run: |
         dotnet restore csharp/ApiDocs/ApiDocs.csproj
