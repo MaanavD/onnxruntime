@@ -25,13 +25,15 @@ jobs:
       DOCFXVERSION: 2.62.2
     steps:
     - uses: actions/checkout@v4
+    - name: Install Mono
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y mono-complete
     - name: Install DocFX
       run: |
         dotnet tool update -g docfx
-    - name: Update PATH
-      run: |
         echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
-    # NOTE: Restore Microsoft.ML.OnnxRuntime.csproj manually
+    # Restore project dependencies
     - name: Restore dependencies
       run: |
         dotnet restore csharp/ApiDocs/ApiDocs.csproj
