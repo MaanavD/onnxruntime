@@ -21,8 +21,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DOCFXVERSION: 2.62.2
     steps:
     - uses: actions/checkout@v4
     - name: Install Mono
