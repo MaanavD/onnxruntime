@@ -1,16 +1,10 @@
 <script lang="ts">
 	import { base } from '$app/paths';
-	import { onMount } from 'svelte';
-	import anime from 'animejs';
-	import { text } from '@sveltejs/kit';
-	import { Highlight } from 'svelte-highlight';
-	import { bash } from 'svelte-highlight/languages';
 	import FaRegClipboard from 'svelte-icons/fa/FaRegClipboard.svelte';
-	import FaClipboardCheck from 'svelte-icons/fa/FaClipboardCheck.svelte'
+	import FaClipboardCheck from 'svelte-icons/fa/FaClipboardCheck.svelte';
 	import OnnxLight from '../../images/ONNX-Light.svelte';
-	import OnnxDark from '../../images/ONNX-Dark.svelte';
 	import { fade } from 'svelte/transition';
-	import { quartInOut } from 'svelte/easing';
+	import { cubicOut } from 'svelte/easing';
 
 	let words = [
 		'Cross-Platform',
@@ -30,22 +24,20 @@
 	let cycleWord = () => {
 		currentWord = (currentWord + 1) % words.length;
 		activeWord = words[currentWord];
-		if (currentWord == 0) {
-			setTimeout(cycleWord, 5000);
-		} else {
-			setTimeout(cycleWord, 3000);
-		}
+		setTimeout(cycleWord, currentWord === 0 ? 5000 : 3000);
 	};
 	setTimeout(cycleWord, 2000);
+
 	let pythonCode = 'pip install onnxruntime';
 	let gaiCode = 'pip install onnxruntime-genai';
-	let copied = false;
-	let copy = async (code: string) => {
+
+	let copiedIndex: number | null = null;
+	let copy = async (code: string, index: number) => {
 		try {
-			copied = true;
+			copiedIndex = index;
 			setTimeout(() => {
-				copied = false;
-			}, 3000);
+				copiedIndex = null;
+			}, 2500);
 			await navigator.clipboard.writeText(code);
 		} catch (err) {
 			console.error('Failed to copy:', err);
@@ -53,74 +45,110 @@
 	};
 </script>
 
-{#if copied}
-	<div class="toast toast-top top-14 z-50" role="alert">
-		<div class="alert alert-info">
-			<div class="icon" style="width: 16px; height: 16px;">
-				<FaClipboardCheck />
-			</div>
-			<span>Code successfully copied!</span>
-		</div>
-	</div>
-{/if}
-<div role="main" class="hero bg-gradient-to-b from-primary">
-	<div class="hero-content md:my-20">
-		<div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-			<div class="col-span-4 self-center md:mr-20">
-				<h1 class="lg:text-5xl text-4xl">
+<section
+	role="main"
+	class="relative overflow-hidden bg-base-100"
+>
+	<!-- Subtle dot grid background -->
+	<div class="hero-dot-grid" aria-hidden="true"></div>
+
+	<div class="relative max-w-7xl mx-auto px-6 lg:px-12 py-20 md:py-28 lg:py-36">
+		<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+			<!-- Left content — spans wider -->
+			<div class="lg:col-span-7 xl:col-span-8">
+				<h1 class="font-display font-bold tracking-tight" style="font-size: var(--text-4xl); line-height: 1.08;">
 					Accelerated
 					{#key activeWord}
 						<span
-							class="lg:text-5xl text-4xl"
-							in:fade={{ delay: 0, duration: 1000, easing: quartInOut }}
-						>
-							{activeWord}
-						</span>
+							class="text-primary inline-block"
+							in:fade={{ duration: 600, easing: cubicOut }}
+						>{activeWord}</span>
 					{/key}
-					<br />
-					Machine Learning
+					<br />Machine Learning
 				</h1>
-				<p class="py-3">
-					Production-grade AI engine to speed up training and inferencing in your existing
-					technology stack.
+
+				<p class="font-body mt-6 max-w-xl" style="font-size: var(--text-lg); color: var(--fallback-bc,oklch(var(--bc)/0.65));">
+					Production-grade AI engine that accelerates training and inferencing across your existing technology stack.
 				</p>
-				<p class="text-xl my-4">In a rush? Get started easily:</p>
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-					<div class="grid grid-cols-6 border-solid border-2 border-secondary">
-						<div class="col-span-5">
-							<Highlight language={bash} code={pythonCode} />
-						</div>
+
+				<!-- Install commands -->
+				<div class="mt-10 flex flex-col sm:flex-row gap-3 max-w-xl">
+					<div class="group flex items-center rounded-lg bg-base-200/70 border border-base-300/60 flex-1 overflow-hidden transition-colors duration-200 hover:border-primary/30">
+						<code class="font-mono text-sm px-4 py-3 flex-1 select-all text-base-content/85">{pythonCode}</code>
 						<button
-							aria-label="copy python code"
-							on:click={() => copy(pythonCode)}
-							class="col-span-1 btn rounded-none h-full *:hover:scale-125 *:hover:transition *:hover:duration-200"
-							><span class="min-w-6 h-6"><FaRegClipboard /></span></button
+							aria-label="Copy pip install onnxruntime"
+							on:click={() => copy(pythonCode, 0)}
+							class="px-3 py-3 text-base-content/40 hover:text-primary border-l border-base-300/60 transition-colors duration-200"
 						>
+							<span class="w-4 h-4 block">
+								{#if copiedIndex === 0}
+									<FaClipboardCheck />
+								{:else}
+									<FaRegClipboard />
+								{/if}
+							</span>
+						</button>
 					</div>
-					<div class="grid grid-cols-6 border-solid border-2 border-secondary">
-						<div class="col-span-5">
-							<Highlight language={bash} code={gaiCode} />
-						</div>
+
+					<div class="group flex items-center rounded-lg bg-base-200/70 border border-base-300/60 flex-1 overflow-hidden transition-colors duration-200 hover:border-primary/30">
+						<code class="font-mono text-sm px-4 py-3 flex-1 select-all text-base-content/85">{gaiCode}</code>
 						<button
-							aria-label="copy nuget code"
-							on:click={() => copy(gaiCode)}
-							class="col-span-1 btn rounded-none h-full *:hover:scale-125 *:hover:transition *:hover:duration-200"
-							><span class="min-w-6 h-6"><FaRegClipboard /></span></button
+							aria-label="Copy pip install onnxruntime-genai"
+							on:click={() => copy(gaiCode, 1)}
+							class="px-3 py-3 text-base-content/40 hover:text-primary border-l border-base-300/60 transition-colors duration-200"
 						>
+							<span class="w-4 h-4 block">
+								{#if copiedIndex === 1}
+									<FaClipboardCheck />
+								{:else}
+									<FaRegClipboard />
+								{/if}
+							</span>
+						</button>
 					</div>
 				</div>
-				<!-- <p class="text-lg mt-2">
-					<a class="underline" href="https://">More interested in training? More info here.</a>
-				</p> -->
-				<p class="text-lg mt-2">
-					<a class="text-primary font-medium hover:text-primary-focus" href="./getting-started"
-						>Interested in using other languages? See the many others we support →</a
+
+				<p class="mt-6 font-body text-sm">
+					<a
+						class="text-base-content/50 hover:text-primary transition-colors duration-200 inline-flex items-center gap-1.5"
+						href="./getting-started"
 					>
+						Interested in other languages? See all we support
+						<svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</a>
 				</p>
 			</div>
-			<div class="hidden lg:inline mx-auto hover:rotate-180 transition duration-500">
-				<OnnxLight width={300} height={300} />
+
+			<!-- Right side — ONNX logo -->
+			<div class="hidden lg:flex lg:col-span-5 xl:col-span-4 justify-center items-center">
+				<div class="hero-logo-wrap transition-transform duration-700 ease-out hover:rotate-12 hover:scale-105">
+					<OnnxLight width={220} height={220} />
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<!-- Copied toast -->
+	{#if copiedIndex !== null}
+		<div
+			class="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 rounded-lg bg-base-200 border border-base-300/60 shadow-lg font-body text-sm text-base-content/80"
+			transition:fade={{ duration: 250 }}
+			role="alert"
+		>
+			<span class="w-4 h-4 text-success"><FaClipboardCheck /></span>
+			Copied to clipboard
+		</div>
+	{/if}
+</section>
+
+<style>
+	.hero-dot-grid {
+		position: absolute;
+		inset: 0;
+		background-image: radial-gradient(circle, oklch(0.55 0.02 200 / 0.08) 1px, transparent 1px);
+		background-size: 28px 28px;
+		pointer-events: none;
+	}
+</style>

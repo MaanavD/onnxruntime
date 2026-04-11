@@ -224,32 +224,11 @@
 	];
 </script>
 
-<div class="lg:my-5">
-	<h2 class="text-3xl my-5 text-center">Trusted By</h2>
-	<div class="divider" />
+<section class="py-16 lg:py-20">
+	<h2 class="font-display tracking-tight text-4xl mb-10 text-center">Trusted By</h2>
 	<InfiniteMovingCards
 		items={testimonials.sort(() => Math.random() - 0.5)}
 		direction="left"
 		speed="slow"
 	/>
-	<!-- <div class="container mx-auto md:px-16 px-8 lg:my-10">
-		<h2 class="text-2xl pt-10 pb-4">Learn more about how to use ONNX Runtime with</h2>
-		<div class="grid md:grid-cols-3 grid-cols-1 gap-4 mx-auto pb-10">
-			<a
-				href="./pytorch"
-				class="pt-2 hover:scale-105 transition duration-200 bg-slate-300 border-solid border-2 border-secondary rounded h-full"
-				><img class="px-10 py-5" src={pytorchlogo} alt="PyTorch Logo" /></a
-			>
-			<a
-				href="./windows"
-				class="pt-2 hover:scale-105 transition duration-200 bg-slate-300 border-solid border-2 border-secondary rounded h-full"
-				><img class="px-10 py-5" src={windowslogo} alt="Windows Logo" /></a
-			>
-			<a
-				href="./huggingface"
-				class=" hover:scale-105 transition duration-200 bg-slate-300 border-solid border-2 border-secondary rounded h-full"
-				><img class="px-10 py-5" src={huggingfacelogoTitle} alt="HuggingFace Logo" /></a
-			>
-		</div>
-	</div> -->
-</div>
+</section>

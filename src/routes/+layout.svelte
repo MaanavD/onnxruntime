@@ -48,7 +48,7 @@
 	<meta name="theme-color" content="#B2B2B2" />
 	<meta property="og:type" content="website" />
 </svelte:head>
-<div class="selection:bg-info">
+<div class="font-body selection:bg-info">
 	{#if !$page.url.pathname.startsWith('/blogs/')}
 		<Header />
 	{/if}

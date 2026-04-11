@@ -9,7 +9,8 @@
 	import TrainingAndInference from './components/training-and-inference.svelte';
 	import IoIosClose from 'svelte-icons/io/IoIosClose.svelte';
 	import { onMount } from 'svelte';
-	import anime from 'animejs';
+
+	let toastVisible = false;
 
 	let removetoast = (e: any) => {
 		e.target.parentNode.parentNode.remove();
@@ -31,16 +32,9 @@
 	];
 
 	onMount(() => {
-		anime({
-			targets: '.toast',
-			opacity: '1',
-			duration: 1000,
-			delay: 10000,
-			easing: 'easeInOutQuad',
-			begin: function () {
-				document.querySelector<HTMLElement>('.toast')!.style.display = 'block';
-			}
-		});
+		setTimeout(() => {
+			toastVisible = true;
+		}, 10000);
 	});
 	let description =
 		'Cross-platform accelerated machine learning. Built-in optimizations speed up training and inferencing with your existing technology stack.';
@@ -75,8 +69,8 @@
 <CrossPlatform />
 <Performance />
 <TrainingAndInference />
-<div class="toast z-10 opacity-0 hidden">
-	<div class="alert alert-info">
+<div class="toast z-10 transition-opacity duration-1000" class:opacity-0={!toastVisible} class:hidden={!toastVisible}>
+	<div class="alert bg-base-200 text-base-content">
 		<svg
 			xmlns="https://www.w3.org/2000/svg"
 			fill="none"
@@ -96,77 +90,4 @@
 	</div>
 </div>
 
-<style>
-	@-webkit-keyframes -global-slide-in-bottom {
-		0% {
-			-webkit-transform: translateY(1000px);
-			transform: translateY(1000px);
-			opacity: 0;
-		}
-		100% {
-			-webkit-transform: translateY(0);
-			transform: translateY(0);
-			opacity: 1;
-		}
-	}
-	@keyframes -global-slide-in-bottom {
-		0% {
-			-webkit-transform: translateY(1000px);
-			transform: translateY(1000px);
-			opacity: 0;
-		}
-		100% {
-			-webkit-transform: translateY(0);
-			transform: translateY(0);
-			opacity: 1;
-		}
-	}
-	@-webkit-keyframes -global-slide-in-left {
-		0% {
-			-webkit-transform: translateX(-1000px);
-			transform: translateX(-1000px);
-			opacity: 0;
-		}
-		100% {
-			-webkit-transform: translateX(0);
-			transform: translateX(0);
-			opacity: 1;
-		}
-	}
-	@keyframes -global-slide-in-left {
-		0% {
-			-webkit-transform: translateX(-1000px);
-			transform: translateX(-1000px);
-			opacity: 0;
-		}
-		100% {
-			-webkit-transform: translateX(0);
-			transform: translateX(0);
-			opacity: 1;
-		}
-	}
-	@-webkit-keyframes -global-slide-in-right {
-		0% {
-			-webkit-transform: translateX(1000px);
-			transform: translateX(1000px);
-			opacity: 0;
-		}
-		100% {
-			-webkit-transform: translateX(0);
-			transform: translateX(0);
-			opacity: 1;
-		}
-	}
-	@keyframes -global-slide-in-right {
-		0% {
-			-webkit-transform: translateX(1000px);
-			transform: translateX(1000px);
-			opacity: 0;
-		}
-		100% {
-			-webkit-transform: translateX(0);
-			transform: translateX(0);
-			opacity: 1;
-		}
-	}
-</style>
+
