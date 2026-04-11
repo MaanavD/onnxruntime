@@ -50,61 +50,65 @@
 </script>
 
 <svelte:window bind:innerWidth />
-<div class="container mx-auto px-4">
-	<h3 class="text-xl mb-4 text-center">
+<div class="section-container py-10">
+	<h3 class="text-lg mb-6 text-center text-muted">
 		Use ONNX Runtime with your favorite language and get started with the tutorials:
 	</h3>
-	<div class="grid-cols-1 lg:grid-cols-3 gap-4 grid">
-		<div class="col-span-1 mx-auto mt-6 mx-4 lg:mx-0 lg:ml-10">
-			<div class="mx-auto">
-				<a href="./getting-started" class="my-2 btn btn-primary rounded-sm btn-block">Quickstart</a>
-				<a rel="external" href="./docs/tutorials" class="my-2 btn btn-primary rounded-sm btn-block"
-					>Tutorials</a
-				>
-				<a rel="external" href="./docs/install" class="my-2 btn btn-primary rounded-sm btn-block"
-					>Install ONNX Runtime</a
-				>
-				<a
-					rel="external"
-					href="./docs/execution-providers"
-					class="my-2 btn btn-primary rounded-sm btn-block">Hardware acceleration</a
-				>
-				<a
-					rel="external"
-					href="./docs/get-started"
-					class="lg:hidden my-2 btn btn-primary rounded-sm btn-block">Get started (Docs)</a
-				>
-			</div>
+	<div class="grid-cols-1 lg:grid-cols-3 gap-8 grid">
+		<div class="col-span-1 flex flex-col gap-2 lg:pt-4">
+			<a href="./getting-started" class="btn btn-primary rounded-lg btn-block">Quickstart</a>
+			<a rel="external" href="./docs/tutorials" class="btn-secondary-outline btn-block rounded-lg"
+				>Tutorials</a
+			>
+			<a rel="external" href="./docs/install" class="btn-secondary-outline btn-block rounded-lg"
+				>Install ONNX Runtime</a
+			>
+			<a
+				rel="external"
+				href="./docs/execution-providers"
+				class="btn-secondary-outline btn-block rounded-lg">Hardware acceleration</a
+			>
+			<a
+				rel="external"
+				href="./docs/get-started"
+				class="lg:hidden btn-secondary-outline btn-block rounded-lg">Get started (Docs)</a
+			>
 		</div>
 		<div class="col-span-2 lg:mx-auto lg:min-w-[675px] min-h-[400px] max-w-[100vw]">
-			<div class="tabs tabs-bordered">
-				<p
-					on:mouseenter={handleClick}
-					class="tab tab-lg {activeTab === 'Python' ? 'tab-active' : ''}"
-				>
-					Python
-				</p>
-				<p on:mouseenter={handleClick} class="tab tab-lg {activeTab === 'C#' ? 'tab-active' : ''}">
-					C#
-				</p>
-				<p
-					on:mouseenter={handleClick}
-					class="tab tab-lg {activeTab === 'JavaScript' || activeTab == 'JS' ? 'tab-active' : ''}"
-				>
-					{innerWidth >= 1024 ? 'JavaScript' : 'JS'}
-				</p>
-				<p
-					on:mouseenter={handleClick}
-					class="tab tab-lg {activeTab === 'Java' ? 'tab-active' : ''}"
-				>
-					Java
-				</p>
-				<p on:mouseenter={handleClick} class="tab tab-lg {activeTab === 'C++' ? 'tab-active' : ''}">
-					C++
-				</p>
+			<div class="flex gap-1 border-b border-base-300 mb-0">
 				<button
 					on:click={handleClick}
-					class="tab tab-lg hidden lg:block {activeTab === 'More..' ? 'tab-active' : ''}"
+					class="px-4 py-2 text-sm font-medium rounded-t-lg transition-colors {activeTab === 'Python' ? 'bg-base-200 text-primary border-b-2 border-primary' : 'text-muted hover:text-base-content'}"
+				>
+					Python
+				</button>
+				<button
+					on:click={handleClick}
+					class="px-4 py-2 text-sm font-medium rounded-t-lg transition-colors {activeTab === 'C#' ? 'bg-base-200 text-primary border-b-2 border-primary' : 'text-muted hover:text-base-content'}"
+				>
+					C#
+				</button>
+				<button
+					on:click={handleClick}
+					class="px-4 py-2 text-sm font-medium rounded-t-lg transition-colors {activeTab === 'JavaScript' || activeTab == 'JS' ? 'bg-base-200 text-primary border-b-2 border-primary' : 'text-muted hover:text-base-content'}"
+				>
+					{innerWidth >= 1024 ? 'JavaScript' : 'JS'}
+				</button>
+				<button
+					on:click={handleClick}
+					class="px-4 py-2 text-sm font-medium rounded-t-lg transition-colors {activeTab === 'Java' ? 'bg-base-200 text-primary border-b-2 border-primary' : 'text-muted hover:text-base-content'}"
+				>
+					Java
+				</button>
+				<button
+					on:click={handleClick}
+					class="px-4 py-2 text-sm font-medium rounded-t-lg transition-colors {activeTab === 'C++' ? 'bg-base-200 text-primary border-b-2 border-primary' : 'text-muted hover:text-base-content'}"
+				>
+					C++
+				</button>
+				<button
+					on:click={handleClick}
+					class="px-4 py-2 text-sm font-medium rounded-t-lg transition-colors hidden lg:block {activeTab === 'More..' ? 'bg-base-200 text-primary border-b-2 border-primary' : 'text-muted hover:text-base-content'}"
 					>More..</button
 				>
 			</div>
@@ -113,8 +117,8 @@
 				<div class="div" in:fade={{ duration: 500 }}>
 					<a
 						href="https://onnxruntime.ai/docs/get-started/with-python"
-						class="btn btn-sm float-right -mt-8 z-10 rounded-none"
-						>Python Docs<span class="w-5 h-5"><FaLink /></span></a
+						class="btn btn-sm btn-ghost float-right -mt-8 z-10 text-xs rounded-lg"
+						>Python Docs<span class="w-4 h-4"><FaLink /></span></a
 					>
 				</div>
 			{:else if activeTab === 'C#'}
@@ -122,8 +126,8 @@
 					<Highlight language={csharp} code={csharpCode} />
 					<a
 						href="https://onnxruntime.ai/docs/get-started/with-csharp"
-						class="btn btn-sm float-right -mt-8 z-10 rounded-none"
-						>C# Docs<span class="w-5 h-5"><FaLink /></span></a
+						class="btn btn-sm btn-ghost float-right -mt-8 z-10 text-xs rounded-lg"
+						>C# Docs<span class="w-4 h-4"><FaLink /></span></a
 					>
 				</div>
 			{:else if activeTab === 'JavaScript' || activeTab === 'JS'}
@@ -131,8 +135,8 @@
 					<Highlight language={javascript} code={javascriptCode} />
 					<a
 						href="https://onnxruntime.ai/docs/get-started/with-javascript"
-						class="btn btn-sm float-right -mt-8 z-10 rounded-none"
-						>JavaScript Docs<span class="w-5 h-5"><FaLink /></span></a
+						class="btn btn-sm btn-ghost float-right -mt-8 z-10 text-xs rounded-lg"
+						>JavaScript Docs<span class="w-4 h-4"><FaLink /></span></a
 					>
 				</div>
 			{:else if activeTab === 'Java'}
@@ -140,8 +144,8 @@
 					<Highlight language={java} code={javaCode} />
 					<a
 						href="https://onnxruntime.ai/docs/get-started/with-java"
-						class="btn btn-sm float-right -mt-8 z-10 rounded-none"
-						>Java Docs<span class="w-5 h-5"><FaLink /></span></a
+						class="btn btn-sm btn-ghost float-right -mt-8 z-10 text-xs rounded-lg"
+						>Java Docs<span class="w-4 h-4"><FaLink /></span></a
 					>
 				</div>
 			{:else if activeTab === 'C++'}
@@ -149,8 +153,8 @@
 					<Highlight language={cpp} code={cppCode} />
 					<a
 						href="https://onnxruntime.ai/docs/get-started/with-cpp"
-						class="btn btn-sm float-right -mt-8 z-10 rounded-none"
-						>C++ Docs<span class="w-5 h-5"><FaLink /></span></a
+						class="btn btn-sm btn-ghost float-right -mt-8 z-10 text-xs rounded-lg"
+						>C++ Docs<span class="w-4 h-4"><FaLink /></span></a
 					>
 				</div>
 			{:else if activeTab === 'More..'}
@@ -160,5 +164,4 @@
 			{/if}
 		</div>
 	</div>
-	<div class="divider px-6" />
 </div>

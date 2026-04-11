@@ -109,6 +109,6 @@
 	</div>
 	<div class="mx-4 md:mx-10">
 		<h3 class="text-3xl py-4">Past Event Videos</h3>
-		<Videogallery {videos} title="false" px="0" my="0" />
+		<Videogallery {videos} title={false} />
 	</div>
 </div>

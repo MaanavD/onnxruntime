@@ -76,23 +76,23 @@
 <Performance />
 <TrainingAndInference />
 <div class="toast z-10 opacity-0 hidden">
-	<div class="alert alert-info">
+	<div class="bg-base-200 border border-base-300 shadow-lg rounded-lg p-4 flex items-center gap-3">
 		<svg
 			xmlns="https://www.w3.org/2000/svg"
 			fill="none"
 			viewBox="0 0 24 24"
-			class="stroke-current shrink-0 w-6 h-6"
+			class="stroke-current shrink-0 w-5 h-5 text-primary"
 			><path
 				stroke-linecap="round"
 				stroke-linejoin="round"
 				stroke-width="2"
 				d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
 			/></svg
-		><span
-			>Please help us improve ONNX Runtime <br class="md:hidden" />by participating in our
-			<a class="underline" href="https://ncv.microsoft.com/UySXuzobM9">customer survey</a>.
+		><span class="text-sm"
+			>Help us improve ONNX Runtime <br class="md:hidden" />by participating in our
+			<a class="link-arrow" href="https://ncv.microsoft.com/UySXuzobM9">customer survey</a>.
 		</span>
-		<button aria-label="close" on:click={removetoast} class="w-8 h-8 pt-1"><IoIosClose /></button>
+		<button aria-label="close" on:click={removetoast} class="w-6 h-6 text-muted hover:text-base-content"><IoIosClose /></button>
 	</div>
 </div>
 

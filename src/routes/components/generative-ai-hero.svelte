@@ -3,23 +3,22 @@
 	import Ortgenerativeai from '../../images/undraw/image_ortgenerativeai.svelte';
 </script>
 
-<div class="container mx-auto px-10 my-10">
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-		<div class="">
-			<h2 class="text-4xl">Generative AI</h2>
-			<br /><br />
-			<p class="text-xl">
-				Integrate the power of Generative AI and Large language Models (LLMs) in your apps and
+<div class="section-container section-gap">
+	<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+		<div>
+			<p class="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Built for the future</p>
+			<h2 class="mb-4">Generative AI</h2>
+			<p class="text-lg text-muted max-w-lg mb-6">
+				Integrate the power of Generative AI and Large Language Models (LLMs) in your apps and
 				services with ONNX Runtime. No matter what language you develop in or what platform you need
 				to run on, you can make use of state-of-the-art models for image synthesis, text generation,
 				and more.
 			</p>
-			<br />
-			<a href="./generative-ai" class="btn btn-primary"
-				>Learn more about ONNX Runtime & Generative AI →</a
+			<a href="./generative-ai" class="btn btn-primary rounded-lg"
+				>Learn more about Generative AI →</a
 			>
 		</div>
-		<div class="m-auto overflow:hidden">
+		<div class="flex justify-center">
 			<Ortgenerativeai />
 		</div>
 	</div>

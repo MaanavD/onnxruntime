@@ -224,9 +224,9 @@
 	];
 </script>
 
-<div class="lg:my-5">
-	<h2 class="text-3xl my-5 text-center">Trusted By</h2>
-	<div class="divider" />
+<div class="py-12 lg:py-16">
+	<h2 class="text-2xl my-5 text-center text-muted font-medium">Trusted By</h2>
+	<div class="border-t border-base-300 mb-6" />
 	<InfiniteMovingCards
 		items={testimonials.sort(() => Math.random() - 0.5)}
 		direction="left"
